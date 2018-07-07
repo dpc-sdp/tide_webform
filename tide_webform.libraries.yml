@@ -1,0 +1,6 @@
+content_rating:
+  version: 1.0
+  js:
+    js/content_rating.js: {}
+  dependencies:
+    - core/jquery

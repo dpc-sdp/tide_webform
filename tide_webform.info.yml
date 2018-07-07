@@ -1,0 +1,19 @@
+name: Tide Webform
+description: 'Provides Webform and related configuration.'
+type: module
+package: Tide
+core: 8.x
+dependencies:
+  - config_filter:config_filter
+  - config_ignore:config_ignore
+  - token_conditions:token_conditions
+  - webform:webform
+  - webform:webform_ui
+  - dpc-sdp:tide_core
+config_devel:
+  install:
+    - field.storage.node.field_show_content_rating
+    - webform.webform.tide_webform_content_rating
+  optional:
+    - block.block.tide_webform_content_rating
+    - jsonapi_extras.jsonapi_resource_config.webform--webform

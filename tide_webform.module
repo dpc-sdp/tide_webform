@@ -1,0 +1,94 @@
+<?php
+
+/**
+ * @file
+ * Tide Webform.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\jsonapi\Normalizer\Value\FieldItemNormalizerValue;
+use Drupal\jsonapi\Normalizer\Value\FieldNormalizerValue;
+use Drupal\webform\Entity\Webform;
+
+/**
+ * Implements hook_config_ignore_settings_alter().
+ */
+function tide_webform_config_ignore_settings_alter(array &$settings) {
+  // Ignore the Content Rating webform so that it won't be reverted
+  // during config sync.
+  $settings[] = 'webform.webform.tide_webform_content_rating';
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (!empty($form['#webform_id']) && $form['#webform_id'] == 'tide_webform_content_rating') {
+    $form['#attached']['library'][] = 'tide_webform/content_rating';
+  }
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ *
+ * @see \Drupal\webform\Entity\WebformSubmission::baseFieldDefinitions()
+ */
+function tide_webform_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  if ($entity_type->id() == 'webform_submission') {
+    // Expose the data attribute as a field.
+    if (empty($fields['data'])) {
+      $fields['data'] = BaseFieldDefinition::create('string_long')
+        ->setName('data')
+        ->setLabel('Data')
+        ->setDescription(t('Webform Submission Data'))
+        ->setDefaultValue('')
+        ->setTargetEntityTypeId('webform_submission')
+        ->setComputed(TRUE);
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_create_access().
+ *
+ * @see \Drupal\webform\WebformSubmissionAccessControlHandler::checkAccess()
+ */
+function tide_webform_webform_submission_create_access(AccountInterface $account, array $context, $entity_bundle) {
+  // Check webform create access.
+  // This hook should be only invoked if the webform_submission is created
+  // programmatically via entity_create() instead of submitting the webform.
+  $webform = Webform::load($entity_bundle);
+  if ($webform) {
+    /** @var \Drupal\Core\Access\AccessResultInterface $webform_access */
+    $webform_access = $webform->checkAccessRules('create', $account, NULL);
+    if ($webform_access->isAllowed()) {
+      return $webform_access;
+    }
+  }
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_config_entity_normalizer_values_alter().
+ */
+function tide_webform_config_entity_normalizer_values_alter(&$normalizer_values, &$context, &$context2) {
+  /** @var object $entity */
+  $entity = $context2['entity'];
+  if ($entity instanceof Webform) {
+    // Adds the rendered HTML of the webform.
+    try {
+      $renderer = \Drupal::service('renderer');
+      $webform = $entity->getSubmissionForm();
+      $rendered_webform = $renderer->renderRoot($webform);
+      $webform_markup = new FieldItemNormalizerValue([$rendered_webform], $context['cacheable_metadata']);
+      $normalizer_values['markup'] = new FieldNormalizerValue(AccessResult::allowed(), [$webform_markup], 1, 'attributes');
+    }
+    catch (\Exception $exception) {
+      watchdog_exception('tide_webform', $exception);
+    }
+  }
+}
