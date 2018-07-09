@@ -9,6 +9,11 @@
         "drupal/config_ignore": "^2.1",
         "drupal/token_conditions": "dev-1.x",
         "drupal/webform": "^5.0@RC",
-        "dpc-sdp/tide_core": "dev-master"
+        "dpc-sdp/tide_core": "1.x-dev"
+    },    
+    "extra": {    
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
     }
 }
