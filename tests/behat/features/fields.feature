@@ -13,7 +13,7 @@ Feature: 'Show Content Rating?' field
     And I should see an "input#edit-field-show-content-rating-value" element
     And I should not see an "input#edit-field-show-content-rating-value.required" element
 
-    Given I am logged in as a user with the "create landing-page content" permission
+    Given I am logged in as a user with the "create landing page content" permission
     When I visit "node/add/landing_page"
     And save screenshot
 
