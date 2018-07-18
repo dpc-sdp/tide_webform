@@ -11,6 +11,7 @@
         "dpc-sdp/tide_core": "@dev"
     },
     "suggest": {
+        "dpc-sdp/tide_landing_page": "@dev",
         "dpc-sdp/tide_page": "@dev"
     },
     "repositories": {
