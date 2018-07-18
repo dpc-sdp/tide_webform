@@ -19,7 +19,7 @@ The Tide Webform module provides the Content Rating form.
 It also provides the `Show Content Rating?` field for Tide Landing Page and Tide Page.
 
 # REQUIREMENTS
-* [Tide Core Profile](https://github.com/dpc-sdp/tide)
+* [Tide Core](https://github.com/dpc-sdp/tide_core)
 
 # RECOMMENDED MODULES
 * [Tide Page](https://github.com/dpc-sdp/tide_page)
