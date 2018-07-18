@@ -11,8 +11,7 @@
         "dpc-sdp/tide_core": "dev-master"
     },
     "suggest": {
-        "dpc-sdp/tide_page": "@dev",
-        "dpc-sdp/tide_landing_page": "@dev"
+        "dpc-sdp/tide_page": "@dev"
     },
     "repositories": {
         "drupal": {
