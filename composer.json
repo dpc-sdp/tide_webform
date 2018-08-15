@@ -12,6 +12,7 @@
     },
     "suggest": {
         "dpc-sdp/tide_landing_page": "@dev",
+        "dpc-sdp/tide_api": "@dev",
         "dpc-sdp/tide_page": "@dev"
     },
     "repositories": {
