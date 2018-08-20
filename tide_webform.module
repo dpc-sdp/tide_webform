@@ -13,6 +13,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\jsonapi\Normalizer\Value\FieldItemNormalizerValue;
 use Drupal\jsonapi\Normalizer\Value\FieldNormalizerValue;
 use Drupal\webform\Entity\Webform;
+use Drupal\Core\Cache\CacheableMetadata;
 
 /**
  * Implements hook_config_ignore_settings_alter().
