@@ -84,7 +84,7 @@ function tide_webform_config_entity_normalizer_values_alter(&$normalizer_values,
       $renderer = \Drupal::service('renderer');
       $webform = $entity->getSubmissionForm();
       $rendered_webform = $renderer->renderRoot($webform);
-      $webform_markup = new FieldItemNormalizerValue([$rendered_webform], $context['cacheable_metadata']);
+      $webform_markup = new FieldItemNormalizerValue([$rendered_webform], new CacheableMetadata());
       $normalizer_values['markup'] = new FieldNormalizerValue(AccessResult::allowed(), [$webform_markup], 1, 'attributes');
     }
     catch (\Exception $exception) {
