@@ -80,7 +80,6 @@ help:
 ## Install dependencies
 install:
 	$(call title,Installing dependencies)
-	$(call exec,docker-compose exec cli bash -c "if [ \"$(GITHUB_TOKEN)\" != \"\" ]; then composer config -g github-oauth.github.com $(GITHUB_TOKEN); fi")
 	$(call exec,docker-compose exec cli apk add --update make jq)
 	# Download development config from Tide profile repository.
 	$(call exec,docker-compose exec cli bash -c "curl -L --header 'Accept: application/vnd.github.v3.raw' --header 'User-Agent: dpc-sdp/tide curl v7.47.0' $(COMPOSER_DEV_URL) > $(APP)/composer.dev.json")
@@ -92,6 +91,7 @@ install:
 install-module:
 	$(call title,Installing current module and dependencies)
 	# If running with suggested modules, requre them first.
+	$(call exec,docker-compose exec cli bash -c "if [ "$(INSTALL_SUGGEST)" = "1" ] ; then cat $(COMPOSER_BUILD) | jq -r 'select(.suggest != null) | .suggest | keys[]' | xargs -i composer require {}; fi")
 	# Copy module code into local vendor directory.
 	$(call exec,docker-compose exec cli rm -Rf $(APP)/vendor-local/$(MODULE_NAME))
 	$(call exec,docker-compose exec cli mkdir -p $(APP)/vendor-local/$(MODULE_NAME))
