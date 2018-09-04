@@ -27,6 +27,7 @@ It also provides the `Show Content Rating?` field for Tide Landing Page and Tide
 
 # INSTALLATION
 Include the Tide Landing Page module in your composer.json file
+
 ```bash
 composer require dpc-sdp/tide_webform
 ```
