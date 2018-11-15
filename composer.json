@@ -15,6 +15,15 @@
         "dpc-sdp/tide_api": "@dev",
         "dpc-sdp/tide_page": "@dev"
     },
+    "extra": {
+        "enable-patching": true,
+        "composer-exit-on-patch-failure": true,
+        "patches": {
+            "drupal/webform": {
+                "Error processing Webform Tokens, sending leaked metadata - https://www.drupal.org/project/webform/issues/3010727#comment-12838354": "https://www.drupal.org/files/issues/2018-11-01/3010727-4.patch"
+            }
+        }
+    },
     "repositories": {
         "drupal": {
             "type": "composer",
