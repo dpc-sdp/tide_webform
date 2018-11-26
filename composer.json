@@ -11,7 +11,7 @@
         "dpc-sdp/tide_core": "dev-feature/SDPA-1328-timeline-api-overwrites"
     },
     "suggest": {
-        "dpc-sdp/tide_landing_page": "@dev",
+        "dpc-sdp/tide_landing_page": "dev-feature/SDPA-1328-timeline-api-overwrites",
         "dpc-sdp/tide_api": "@dev",
         "dpc-sdp/tide_page": "@dev"
     },
