@@ -11,7 +11,7 @@
         "dpc-sdp/tide_core": "dev-feature/SDPA-1368-Gran-Remove-paragraph-field-and-additional-changes"
     },
     "suggest": {
-        "dpc-sdp/tide_landing_page": "@dev",
+        "dpc-sdp/tide_landing_page": "dev-feature/SDPA-1368-Gran-Remove-paragraph-field-and-additional-changes",
         "dpc-sdp/tide_api": "@dev",
         "dpc-sdp/tide_page": "@dev"
     },
