@@ -18,7 +18,11 @@
     "extra": {
         "enable-patching": true,
         "composer-exit-on-patch-failure": true,
-        "patches": {}
+        "patches": {
+            "drupal/webform": {
+                "Error processing Webform Tokens, sending leaked metadata - https://www.drupal.org/project/webform/issues/3010727#comment-12928067": "https://www.drupal.org/files/issues/2019-01-15/3010727-40.patch"
+            }
+        }
     },
     "repositories": {
         "drupal": {
