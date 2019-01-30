@@ -6,7 +6,7 @@
     "require": {
         "dpc-sdp/tide_core": "^1.0",
         "drupal/token_conditions": "dev-1.x",
-        "drupal/webform": "5.0.0-rc18"
+        "drupal/webform": "^5.1"
     },
     "suggest": {
         "dpc-sdp/tide_api:^1.0": "Allows to use Drupal in headless mode",
@@ -16,7 +16,7 @@
     "extra": {
         "patches": {
             "drupal/webform": {
-                "Error processing Webform Tokens, sending leaked metadata - https://www.drupal.org/project/webform/issues/3010727#comment-12838354": "https://www.drupal.org/files/issues/2018-11-01/3010727-4.patch"
+                "Error processing Webform Tokens, sending leaked metadata - https://www.drupal.org/project/webform/issues/3010727#comment-12928067": "https://www.drupal.org/files/issues/2019-01-15/3010727-40.patch"
             }
         }
     },
