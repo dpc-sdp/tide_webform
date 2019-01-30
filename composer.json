@@ -2,22 +2,18 @@
     "name": "dpc-sdp/tide_webform",
     "description": "Webform configuration for Tide Drupal 8 distribution",
     "type": "drupal-module",
-    "license": "GPL-2.0+",
+    "license": "GPL-2.0-or-later",
     "require": {
-        "drupal/config_filter": "1.*",
-        "drupal/config_ignore": "^2.1",
+        "dpc-sdp/tide_core": "^1.0",
         "drupal/token_conditions": "dev-1.x",
         "drupal/webform": "^5.1",
-        "dpc-sdp/tide_core": "dev-master"
     },
     "suggest": {
-        "dpc-sdp/tide_landing_page": "@dev",
-        "dpc-sdp/tide_api": "@dev",
-        "dpc-sdp/tide_page": "@dev"
+        "dpc-sdp/tide_api:^1.0": "Allows to use Drupal in headless mode",
+        "dpc-sdp/tide_landing_page:^1.0": "Landing Page content type and related configuration for Tide Drupal 8 distribution",
+        "dpc-sdp/tide_page:^1.0": "Page content type and related configuration for Tide Drupal 8 distribution"
     },
     "extra": {
-        "enable-patching": true,
-        "composer-exit-on-patch-failure": true,
         "patches": {
             "drupal/webform": {
                 "Error processing Webform Tokens, sending leaked metadata - https://www.drupal.org/project/webform/issues/3010727#comment-12928067": "https://www.drupal.org/files/issues/2019-01-15/3010727-40.patch"
@@ -29,14 +25,5 @@
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "platform": {
-            "php": "7.1"
-        },
-        "process-timeout": 0,
-        "sort-packages": true
     }
 }
