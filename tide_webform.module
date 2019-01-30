@@ -62,7 +62,6 @@ function tide_webform_webform_submission_create_access(AccountInterface $account
   // Check webform create access.
   // This hook should be only invoked if the webform_submission is created
   // programmatically via entity_create() instead of submitting the webform.
-
   /** @var \Drupal\webform\WebformAccessRulesManagerInterface $access_rules_manager */
   $access_rules_manager = \Drupal::service('webform.access_rules_manager');
 
