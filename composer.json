@@ -4,7 +4,7 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
-        "dpc-sdp/tide_core": "^1.0",
+        "dpc-sdp/tide_core": "dev-feature/SDPA-309-Vocabulary-License-Type-Independent-Sites as v1.0.0-alpha2",
         "drupal/token_conditions": "dev-1.x",
         "drupal/webform": "5.0.0-rc18"
     },
