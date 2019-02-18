@@ -1,4 +1,4 @@
-@tide @jsonapi @suggest
+@jsonapi @suggest
 Feature: JSON API Webform
 
   Ensure that the Content Rating form is exposed via JSON API.
