@@ -1,5 +1,7 @@
 # Tide Webform
-Page content type for [Tide](https://github.com/dpc-sdp/tide) distribution for [Drupal 8](https://github.com/dpc-sdp)
+Webform module configuration for [Tide](https://github.com/dpc-sdp/tide) distribution for [Drupal 8](https://github.com/dpc-sdp)
+
+Provides the Content Rating form. It also provides the `Show Content Rating?` field for Tide Landing Page and Tide Page.
 
 Tide is a Drupal 8 distribution focused on delivering an API first, headless Drupal content administration site.
 
@@ -10,10 +12,7 @@ Tide is a Drupal 8 distribution focused on delivering an API first, headless Dru
 [![Pull Requests](https://img.shields.io/github/issues-pr/dpc-sdp/tide_page.svg)](https://github.com/dpc-sdp/tide_webform/pulls)
 
 ## What is in this package
-- content type
-- fields
-- blocks
-- views
+- content raiting form
 - JSONAPI module integration
 
 ## Installation
@@ -26,7 +25,7 @@ your `composer.json`:
       "dpc-sdp/tide_page": {
           "type": "vcs",
           "no-api": true,
-          "url": "https://github.com/dpc-sdp/tide_page.git"
+          "url": "https://github.com/dpc-sdp/tide_webform.git"
       }
   }
 }
@@ -34,7 +33,7 @@ your `composer.json`:
 
 Require this package as any other Composer package:
 ```bash
-composer require dpc/tide_page 
+composer require dpc/tide_webform 
 ``` 
 
 ## Support
@@ -65,8 +64,7 @@ To start local development stack:
 - [tide_page](https://github.com/dpc-sdp/tide_page)       
 - [tide_search](https://github.com/dpc-sdp/tide_search)   
 - [tide_site](https://github.com/dpc-sdp/tide_site)       
-- [tide_test](https://github.com/dpc-sdp/tide_test)       
-- [tide_webform](https://github.com/dpc-sdp/tide_webform)  
+- [tide_test](https://github.com/dpc-sdp/tide_test)        
 
 ## License
 This project is licensed under [GPL2](https://github.com/dpc-sdp/tide_webform/blob/master/LICENSE.txt)
