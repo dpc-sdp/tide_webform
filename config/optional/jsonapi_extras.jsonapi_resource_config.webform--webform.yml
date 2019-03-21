@@ -158,7 +158,7 @@ resourceFields:
     publicName: access
     enhancer:
       id: ''
-    disabled: false
+    disabled: true
     advancedOptionsIcon: ''
     enhancer_label: ''
   handlers:
@@ -166,6 +166,6 @@ resourceFields:
     publicName: handlers
     enhancer:
       id: ''
-    disabled: false
+    disabled: true
     advancedOptionsIcon: ''
     enhancer_label: ''

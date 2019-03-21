@@ -132,4 +132,9 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
+  configuration:
+    roles:
+      - anonymous
+    users: {  }
+    permissions: {  }
 handlers: {  }
