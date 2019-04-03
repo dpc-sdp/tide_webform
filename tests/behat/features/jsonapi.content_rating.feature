@@ -4,13 +4,13 @@ Feature: JSON API Webform
   Ensure that the Content Rating form is exposed via JSON API.
 
   Scenario: Send GET request to retrieve the Content Rating form
-    When I send a GET request to "/api/v1/webform/webform?filter[entity_id][value]=tide_webform_content_rating"
+    When I send a GET request to "/api/v1/webform/webform?filter[drupal_internal__id][value]=tide_webform_content_rating"
     Then the rest response status code should be 200
     And the response should be in JSON
     And the JSON node "meta.count" should exist
     And the JSON node "data" should exist
     And the JSON node "data[0].type" should be equal to "webform--webform"
-    And the JSON node "data[0].attributes.entity_id" should be equal to "tide_webform_content_rating"
+    And the JSON node "data[0].attributes.drupal_internal__id" should be equal to "tide_webform_content_rating"
     And the JSON node "data[0].attributes.elements" should exist
     And the JSON node "data[0].attributes.elements.url" should exist
     And the JSON node "data[0].attributes.elements.was_this_page_helpful" should exist
