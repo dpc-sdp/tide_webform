@@ -10,8 +10,6 @@
     },
     "suggest": {
         "dpc-sdp/tide_api:dev-develop": "Allows to use Drupal in headless mode",
-        "dpc-sdp/tide_webform:dev-feature/SDPA-2192_revert_entity_id_alias": "Allows to use Drupal in headless mode",
-        "dpc-sdp/tide_landing_page:dev-develop": "Landing Page content type and related configuration for Tide Drupal 8 distribution",
         "dpc-sdp/tide_page:dev-develop": "Page content type and related configuration for Tide Drupal 8 distribution"
     },
     "repositories": {
