@@ -10,10 +10,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\jsonapi\Normalizer\Value\FieldItemNormalizerValue;
-use Drupal\jsonapi\Normalizer\Value\FieldNormalizerValue;
 use Drupal\webform\Entity\Webform;
-use Drupal\Core\Cache\CacheableMetadata;
 
 /**
  * Implements hook_config_ignore_settings_alter().
@@ -61,35 +58,19 @@ function tide_webform_entity_base_field_info_alter(&$fields, EntityTypeInterface
 function tide_webform_webform_submission_create_access(AccountInterface $account, array $context, $entity_bundle) {
   // Check webform create access.
   // This hook should be only invoked if the webform_submission is created
-  // programmatically via entity_create() instead of submitting the webform.
-  $webform = Webform::load($entity_bundle);
-  if ($webform) {
-    /** @var \Drupal\Core\Access\AccessResultInterface $webform_access */
-    $webform_access = $webform->checkAccessRules('create', $account, NULL);
-    if ($webform_access->isAllowed()) {
-      return $webform_access;
+  // via JSON:API requests.
+  $is_jsonapi = \Drupal::request()->attributes->get('_is_jsonapi', FALSE);
+  if ($is_jsonapi) {
+    $webform = Webform::load($entity_bundle);
+    if ($webform) {
+      /** @var \Drupal\webform\WebformAccessRulesManagerInterface $webform_access_rules_manager */
+      $webform_access_rules_manager = \Drupal::service('webform.access_rules_manager');
+      /** @var \Drupal\Core\Access\AccessResultInterface $webform_access */
+      $webform_access = $webform_access_rules_manager->checkWebformAccess('create', $account, $webform);
+      if ($webform_access->isAllowed()) {
+        return $webform_access;
+      }
     }
   }
   return AccessResult::neutral();
-}
-
-/**
- * Implements hook_config_entity_normalizer_values_alter().
- */
-function tide_webform_config_entity_normalizer_values_alter(&$normalizer_values, &$context, &$context2) {
-  /** @var object $entity */
-  $entity = $context2['entity'];
-  if ($entity instanceof Webform) {
-    // Adds the rendered HTML of the webform.
-    try {
-      $renderer = \Drupal::service('renderer');
-      $webform = $entity->getSubmissionForm();
-      $rendered_webform = $renderer->renderRoot($webform);
-      $webform_markup = new FieldItemNormalizerValue([$rendered_webform], new CacheableMetadata());
-      $normalizer_values['markup'] = new FieldNormalizerValue(AccessResult::allowed(), [$webform_markup], 1, 'attributes');
-    }
-    catch (\Exception $exception) {
-      watchdog_exception('tide_webform', $exception);
-    }
-  }
 }
