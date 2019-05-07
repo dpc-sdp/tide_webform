@@ -10,7 +10,6 @@
     },
     "suggest": {
         "dpc-sdp/tide_api:1.2.0": "Allows to use Drupal in headless mode",
-        "dpc-sdp/tide_landing_page:1.1.0": "Landing Page content type and related configuration for Tide Drupal 8 distribution",
         "dpc-sdp/tide_page:1.2.0": "Page content type and related configuration for Tide Drupal 8 distribution"
     },
     "repositories": {
