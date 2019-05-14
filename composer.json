@@ -9,9 +9,9 @@
         "drupal/webform": "^5.2"
     },
     "suggest": {
-        "dpc-sdp/tide_api:1.2.2": "Allows to use Drupal in headless mode",
-        "dpc-sdp/tide_landing_page:1.1.2": "Landing Page content type and related configuration for Tide Drupal 8 distribution",
-        "dpc-sdp/tide_page:1.2.2": "Page content type and related configuration for Tide Drupal 8 distribution"
+        "dpc-sdp/tide_api:dev-hotfix/1.2.2": "Allows to use Drupal in headless mode",
+        "dpc-sdp/tide_landing_page:dev-hotfix/1.1.2": "Landing Page content type and related configuration for Tide Drupal 8 distribution",
+        "dpc-sdp/tide_page:dev-hotfix/1.2.2": "Page content type and related configuration for Tide Drupal 8 distribution"
     },
     "repositories": {
         "drupal": {
