@@ -50,8 +50,8 @@ function tide_webform_webform_ui_element_form_after_build(array $form, FormState
   // Unset the default properties of the Privacy Statement element to force
   // webform to save them in the YAML source of the element.
   if (isset($storage['element_properties']['type'])
-    && $storage['element_properties']['type'] == 'webform_privacy_statement')
-  {
+    && $storage['element_properties']['type'] == 'webform_privacy_statement'
+  ) {
     unset($storage['default_properties']['title']);
     unset($storage['default_properties']['required']);
     unset($storage['default_properties']['privacy_statement_heading']);

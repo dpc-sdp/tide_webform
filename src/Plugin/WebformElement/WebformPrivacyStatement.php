@@ -28,7 +28,7 @@ class WebformPrivacyStatement extends Checkbox {
 
     $properties = [
       'title' => $default['agreement'],
-      'privacy_statement_heading' => $default['title'],
+      'privacy_statement_heading' => $default['heading'],
       'privacy_statement_content' => $default['content'],
       'required' => TRUE,
     ] + parent::getDefaultProperties();

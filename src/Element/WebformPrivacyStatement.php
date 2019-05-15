@@ -17,10 +17,10 @@ class WebformPrivacyStatement extends Checkbox {
    */
   public function getInfo() {
     return [
-        '#return_value' => TRUE,
-        '#privacy_statement_heading' => '',
-        '#privacy_statement_content' => '',
-      ] + parent::getInfo();
+      '#return_value' => TRUE,
+      '#privacy_statement_heading' => '',
+      '#privacy_statement_content' => '',
+    ] + parent::getInfo();
   }
 
   /**
