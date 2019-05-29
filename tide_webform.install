@@ -6,7 +6,7 @@
  */
 
 /**
- * Load default values.
+ * Load default config values.
  */
 function tide_webform_update_8001() {
   module_load_include('inc', 'tide_core', 'includes/helpers');

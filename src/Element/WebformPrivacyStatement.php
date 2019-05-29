@@ -31,7 +31,7 @@ class WebformPrivacyStatement extends Checkbox {
     $id = 'webform-privacy-statement-' . implode('_', $element['#parents']);
 
     if (empty($element['#title'])) {
-      $element['#title'] = (string) t('I have read and understand the privacy statement.');
+      $element['#title'] = (string) t('I have read and understood the privacy statement.');
     }
 
     $element['#description_display'] = 'before';
@@ -53,11 +53,11 @@ class WebformPrivacyStatement extends Checkbox {
       ],
     ];
     if (!empty($element['#privacy_statement_heading'])) {
-      $element['#description']['privacy_statement']['title'] = [
+      $element['#description']['privacy_statement']['heading'] = [
         '#type' => 'container',
         '#markup' => $element['#privacy_statement_heading'],
         '#attributes' => [
-          'class' => ['webform-privacy-statement-details--title'],
+          'class' => ['webform-privacy-statement-details--heading'],
         ],
       ];
     }

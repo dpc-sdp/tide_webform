@@ -85,7 +85,7 @@ class WebformPrivacyStatement extends Checkbox {
       '#title' => $this->t('I have read and agree to the privacy statement.'),
       '#required' => TRUE,
       '#privacy_statement_heading' => '<em>' . $this->t('Privacy statement') . '</em>',
-      '#privacy_statement_content' => '<em>' . $this->t('These are the privacy statement.') . '</em>',
+      '#privacy_statement_content' => '<em>' . $this->t('This is the privacy statement.') . '</em>',
     ];
   }
 
