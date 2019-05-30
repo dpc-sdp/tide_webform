@@ -4,7 +4,7 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
-        "dpc-sdp/tide_core": "1.2.1",
+        "dpc-sdp/tide_core": "dev-feature/SDPA-2523_redo_SDPA-309-updated-group-patch",
         "drupal/token_conditions": "dev-1.x",
         "drupal/webform": "^5.2"
     },
