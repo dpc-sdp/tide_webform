@@ -4,12 +4,12 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
-        "dpc-sdp/tide_core": "^1.2.3",
+        "dpc-sdp/tide_core": "^1.2.5",
         "drupal/token_conditions": "dev-1.x",
         "drupal/webform": "^5.2"
     },
     "suggest": {
-        "dpc-sdp/tide_api:^1.2.5": "Allows to use Drupal in headless mode"
+        "dpc-sdp/tide_api:^1.2.6": "Allows to use Drupal in headless mode"
     },
     "repositories": {
         "drupal": {
