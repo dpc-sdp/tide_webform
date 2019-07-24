@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
@@ -161,4 +162,13 @@ function tide_webform_webform_submission_create_access(AccountInterface $account
     }
   }
   return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function tide_webform_webform_presave(EntityInterface $entity) {
+  $access_rules = $entity->getAccessRules();
+  $access_rules['configuration']['roles'][] = 'anonymous';
+  $entity->setAccessRules($access_rules);
 }

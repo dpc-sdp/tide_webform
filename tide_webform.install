@@ -5,6 +5,8 @@
  * Install file.
  */
 
+use Drupal\webform\Entity\Webform;
+
 /**
  * Load default config values.
  */
@@ -12,4 +14,42 @@ function tide_webform_update_8001() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
   $config_location = [drupal_get_path('module', 'tide_webform') . '/config/install'];
   _tide_import_single_config('tide_webform.defaults', $config_location);
+}
+
+/**
+ * Set default access permission for anonymous to webforms.
+ */
+function tide_webform_update_8002(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    if ($count = Drupal::entityQuery('webform')->count()->execute()) {
+      $sandbox['total'] = $count;
+      $sandbox['current'] = 0;
+      $sandbox['#finished'] = $count ? 0 : 1;
+    }
+    else {
+      return;
+    }
+  }
+  $batch = 10;
+  $webform_ids = Drupal::entityQuery('webform')
+    ->range($sandbox['current'], $batch)
+    ->execute();
+  foreach ($webform_ids as $webform_id) {
+    $webform = Webform::load($webform_id);
+    $access_rules = $webform->getAccessRules();
+    // $access_rules['configuration']['roles'] will never be NULL.
+    // checking if $access_rules['configuration']['roles'] empty or not.
+    if (empty($access_rules['configuration']['roles']) || !in_array('anonymous', $access_rules['configuration']['roles'])) {
+      $access_rules['configuration']['roles'][] = 'anonymous';
+      $webform->setAccessRules($access_rules);
+      $webform->save();
+    }
+    $sandbox['current']++;
+  }
+  if ($sandbox['total'] == 0) {
+    $sandbox['#finished'] = 1;
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
 }
