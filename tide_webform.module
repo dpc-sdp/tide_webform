@@ -168,7 +168,10 @@ function tide_webform_webform_submission_create_access(AccountInterface $account
  * Implements hook_ENTITY_TYPE_presave().
  */
 function tide_webform_webform_presave(EntityInterface $entity) {
-  $access_rules = $entity->getAccessRules();
-  $access_rules['configuration']['roles'][] = 'anonymous';
-  $entity->setAccessRules($access_rules);
+  if ($entity->isNew()) {
+    $access_rules = $entity->getAccessRules();
+    $access_rules['configuration']['roles'][] = 'anonymous';
+    $access_rules['configuration']['roles'][] = 'authenticated';
+    $entity->setAccessRules($access_rules);
+  }
 }
