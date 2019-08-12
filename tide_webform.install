@@ -93,3 +93,15 @@ function tide_webform_update_8003(&$sandbox) {
     $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
   }
 }
+
+/**
+ * Restricts Content Rating - comments to 500 words.
+ */
+function tide_webform_update_8004() {
+  $webform = Webform::load('tide_webform_content_rating');
+  $comments = $webform->getElement('comments');
+  $comments['#counter_type'] = 'word';
+  $comments['#counter_maximum'] = '500';
+  $webform->setElementProperties('comments', $comments);
+  $webform->save();
+}
