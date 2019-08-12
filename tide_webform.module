@@ -6,7 +6,6 @@
  */
 
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
@@ -77,6 +76,12 @@ function tide_webform_form_webform_admin_config_elements_form_alter(&$form, Form
     '#description_display' => 'before',
     '#open' => TRUE,
     '#tree' => TRUE,
+  ];
+
+  $form['privacy_statement']['add_to_new_form'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Add a default Privacy Statement element when creating a new webform'),
+    '#default_value' => $config->get('privacy_statement.add_to_new_form'),
   ];
 
   $form['privacy_statement']['agreement'] = [
@@ -165,13 +170,37 @@ function tide_webform_webform_submission_create_access(AccountInterface $account
 }
 
 /**
- * Implements hook_ENTITY_TYPE_presave().
+ * Implements hook_form_FORM_ID_alter().
  */
-function tide_webform_webform_presave(EntityInterface $entity) {
-  if ($entity->isNew()) {
-    $access_rules = $entity->getAccessRules();
+function tide_webform_form_webform_add_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\webform\WebformEntityAddForm $form_object */
+  $form_object = $form_state->getFormObject();
+  /** @var \Drupal\webform\WebformInterface $webform */
+  $webform = $form_object->getEntity();
+  if ($webform->isNew()) {
+    // Expose the webform to API requests by default.
+    $access_rules = $webform->getAccessRules();
     $access_rules['configuration']['roles'][] = 'anonymous';
     $access_rules['configuration']['roles'][] = 'authenticated';
-    $entity->setAccessRules($access_rules);
+    $webform->setAccessRules($access_rules);
+
+    // Add a Privacy Statement element to the new webform.
+    $default_privacy_statement = \Drupal::config('tide_webform.defaults')->get('privacy_statement');
+    if (!empty($default_privacy_statement['add_to_new_form'])) {
+      $elements = $webform->getElementsDecoded();
+      if (empty($elements)) {
+        $elements['privacy_statement'] = [
+          '#type' => 'webform_privacy_statement',
+          '#required' => TRUE,
+          '#privacy_statement_heading' => $default_privacy_statement['heading'] ?? '',
+          '#privacy_statement_content' => $default_privacy_statement['content'] ?? '',
+          '#title' => $default_privacy_statement['agreement'] ?? t('I have read and understood the privacy statement.'),
+        ];
+
+        $webform->setElements($elements);
+      }
+    }
   }
+
+  $form_object->setEntity($webform);
 }

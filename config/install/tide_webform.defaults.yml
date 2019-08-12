@@ -1,4 +1,5 @@
 privacy_statement:
+  add_to_new_form: false
   heading: Privacy statement
   content: |
     <p>The Department collects the information that you provide with this complaint form. The information that you provide is used to respond to your enquiry. You can request access to, and corrections of, any personal information provided in this form. Requests for access or correction should be sent to [site:mail].</p>
