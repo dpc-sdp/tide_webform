@@ -10,6 +10,7 @@ dependencies:
   - webform:webform
   - webform:webform_ui
   - dpc-sdp:tide_core
+  - honeypot:honeypot
 config_devel:
   install:
     - field.storage.node.field_show_content_rating

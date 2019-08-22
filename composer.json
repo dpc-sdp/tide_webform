@@ -6,7 +6,8 @@
     "require": {
         "dpc-sdp/tide_core": "^1.2.5",
         "drupal/token_conditions": "dev-1.x",
-        "drupal/webform": "^5.2"
+        "drupal/webform": "^5.2",
+        "drupal/honeypot": "^1.29"
     },
     "suggest": {
         "dpc-sdp/tide_api:^1.2.9": "Allows to use Drupal in headless mode"
