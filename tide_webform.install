@@ -105,3 +105,11 @@ function tide_webform_update_8004() {
   $webform->setElementProperties('comments', $comments);
   $webform->save();
 }
+
+/**
+ * Load honeypot config values.
+ */
+function tide_webform_update_8005() {
+  $config_location = [drupal_get_path('module', 'tide_webform') . '/config/install'];
+  _tide_import_single_config('honeypot.settings', $config_location);
+}
