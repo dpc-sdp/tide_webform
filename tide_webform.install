@@ -110,12 +110,15 @@ function tide_webform_update_8004() {
  * Load honeypot config values.
  */
 function tide_webform_update_8005() {
-  // Enable honeypot module.
-  $module_installer = \Drupal::service('module_installer');
-  $module_installer->install(['honeypot']);
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('honeypot')) {
+    // Enable honeypot module.
+    $module_installer = \Drupal::service('module_installer');
+    $module_installer->install(['honeypot']);
 
-  // Adding custom config.
-  module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_webform') . '/config/optional'];
-  _tide_import_single_config('honeypot.settings', $config_location, TRUE);
+    // Adding custom config.
+    module_load_include('inc', 'tide_core', 'includes/helpers');
+    $config_location = [drupal_get_path('module', 'tide_webform') . '/config/optional'];
+    _tide_import_single_config('honeypot.settings', $config_location, TRUE);
+  }
 }
