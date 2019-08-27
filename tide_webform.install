@@ -116,7 +116,7 @@ function tide_webform_update_8005() {
   // Setting honeypot custom configuration.
   $config_factory = \Drupal::configFactory();
   $config = $config_factory->getEditable('honeypot.settings');
-  $config->set('log', true);
+  $config->set('log', TRUE);
   $config->set('element_name', 'honeypotforms');
   $config->set('time_limit', 10);
   $config->save();
