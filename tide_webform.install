@@ -115,7 +115,7 @@ function tide_webform_update_8005() {
 
   // For new site installation.
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_webform') . '/config/install'];
+  $config_location = [drupal_get_path('module', 'tide_webform') . '/config/optional'];
   _tide_import_single_config('honeypot.settings', $config_location);
 
   // Setting honeypot custom configuration for existing site.
