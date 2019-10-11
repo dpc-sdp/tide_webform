@@ -11,6 +11,8 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\webform\Entity\Webform;
+use Drupal\webform\Entity\WebformSubmission;
+use Drupal\webform\WebformSubmissionForm;
 
 /**
  * Implements hook_config_ignore_settings_alter().
@@ -203,4 +205,19 @@ function tide_webform_form_webform_add_form_alter(&$form, FormStateInterface $fo
   }
 
   $form_object->setEntity($webform);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function tide_webform_webform_submission_presave(WebformSubmission $webform_submission) {
+  $elements = $webform_submission->getWebform()->getElementsDecoded();
+  $errors = WebformSubmissionForm::validateWebformSubmission($webform_submission);
+  if ($errors) {
+    foreach ($elements as $key => $element) {
+      if (isset($errors[$key]) && !empty($errors[$key])) {
+        throw new Exception($errors[$key]);
+      }
+    }
+  }
 }
