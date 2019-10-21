@@ -118,6 +118,6 @@ function tide_webform_update_8005() {
   $config = $config_factory->getEditable('honeypot.settings');
   $config->set('log', TRUE);
   $config->set('element_name', 'honeypotforms');
-  $config->set('time_limit', 10);
+  $config->set('time_limit', 60);
   $config->save();
 }
