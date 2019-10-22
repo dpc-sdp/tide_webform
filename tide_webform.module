@@ -29,6 +29,12 @@ function tide_webform_config_ignore_settings_alter(array &$settings) {
 function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if (!empty($form['#webform_id']) && $form['#webform_id'] == 'tide_webform_content_rating') {
     $form['#attached']['library'][] = 'tide_webform/content_rating';
+
+    // Restricting access for anonymous user from BE.
+    if (\Drupal::currentUser()->isAnonymous()) {
+      $form['#access'] = FALSE;
+      $form['#markup'] = t('Access Denied.');
+    }
   }
 
   if ($form_id == 'webform_ui_element_form') {
