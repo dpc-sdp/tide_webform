@@ -139,6 +139,7 @@ function tide_webform_update_8005() {
       'webform_contact',
       'webform_custom_composite',
       'webform_document_file',
+      'webform_element',
       'webform_email_confirm',
       'webform_email_multiple',
       'webform_entity_checkboxes',
