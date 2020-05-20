@@ -17,3 +17,4 @@ config_devel:
   optional:
     - block.block.tide_webform_content_rating
     - jsonapi_extras.jsonapi_resource_config.webform--webform
+    - webform.settings
