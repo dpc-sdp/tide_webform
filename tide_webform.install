@@ -195,4 +195,5 @@ function tide_webform_update_8006() {
     $visibility['request_path']['pages'] .= "\r\n/clone/*/quick_clone";
   }
   $block->set('visibility', $visibility);
+  $block->save();
 }
