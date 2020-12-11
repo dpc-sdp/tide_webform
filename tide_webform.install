@@ -183,3 +183,15 @@ function tide_webform_update_8005() {
     $config->save();
   }
 }
+
+/**
+ * Updating visibility path.
+ */
+function tide_webform_update_8006() {
+  $block = \Drupal\block\Entity\Block::load('tide_webform_content_rating');
+  $visibility = $block->get('visibility');
+  if (isset($visibility['request_path']['pages'])){
+    $visibility['request_path']['pages'] .= "\r\n/clone/*/quick_clone";
+  }
+  $block->set('visibility',$visibility);
+}
