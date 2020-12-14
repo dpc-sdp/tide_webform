@@ -6,6 +6,7 @@
  */
 
 use Drupal\webform\Entity\Webform;
+use Drupal\block\Entity\Block;
 
 /**
  * Load default config values.
@@ -182,4 +183,17 @@ function tide_webform_update_8005() {
     $config->set('element.excluded_elements', $excluded_elements_value);
     $config->save();
   }
+}
+
+/**
+ * Updating visibility path.
+ */
+function tide_webform_update_8006() {
+  $block = Block::load('tide_webform_content_rating');
+  $visibility = $block->get('visibility');
+  if (isset($visibility['request_path']['pages'])) {
+    $visibility['request_path']['pages'] .= "\r\n/clone/*/quick_clone";
+  }
+  $block->set('visibility', $visibility);
+  $block->save();
 }
