@@ -23,7 +23,7 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "<front>\n/admin\n/admin*\n/batch\n/block/add*\n/node/*/*\n/media/add*\n/media/*/*\n/user/*\n/user/*/*\n/entity-browser*\n/taxonomy/term/*/*"
+    pages: "<front>\n/admin\n/admin*\n/batch\n/block/add*\n/node/*/*\n/media/add*\n/media/*/*\n/user/*\n/user/*/*\n/entity-browser*\n/taxonomy/term/*/*\r\n/clone/*/quick_clone"
     negate: true
     context_mapping: {  }
   token_matcher:
