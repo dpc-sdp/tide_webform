@@ -203,10 +203,12 @@ function tide_webform_update_8006() {
  */
 function tide_webform_update_8007() {
   $block = Block::load('tide_webform_content_rating');
-  $status = $block->get('status');
-  if ($status == TRUE) {
-    $status = FALSE;
+  if ($block) {
+    $status = $block->get('status');
+    if ($status == TRUE) {
+      $status = FALSE;
+    }
+    $block->set('status', $status);
+    $block->save();
   }
-  $block->set('status', $status);
-  $block->save();
 }
