@@ -197,3 +197,18 @@ function tide_webform_update_8006() {
   $block->set('visibility', $visibility);
   $block->save();
 }
+
+/**
+ * Disable content rating block for CMS only.
+ */
+function tide_webform_update_8007() {
+  $block = Block::load('tide_webform_content_rating');
+  if ($block) {
+    $status = $block->get('status');
+    if ($status == TRUE) {
+      $status = FALSE;
+    }
+    $block->set('status', $status);
+    $block->save();
+  }
+}
