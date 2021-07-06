@@ -54,9 +54,6 @@
                 "name": "ckeditor/autogrow",
                 "version": "4.16.1",
                 "type": "drupal-library",
-                "extra": {
-                    "installer-name": "ckeditor.autogrow"
-                },
                 "dist": {
                     "url": "https://download.ckeditor.com/autogrow/releases/autogrow_4.16.1.zip",
                     "type": "zip"
@@ -73,9 +70,6 @@
                 "name": "ckeditor/codemirror",
                 "version": "v1.17.12",
                 "type": "drupal-library",
-                "extra": {
-                    "installer-name": "ckeditor.codemirror"
-                },
                 "dist": {
                     "url": "https://github.com/w8tcha/CKEditor-CodeMirror-Plugin/releases/download/v1.17.12/CKEditor-CodeMirror-Plugin.zip",
                     "type": "zip"
@@ -92,9 +86,6 @@
                 "name": "ckeditor/fakeobjects",
                 "version": "4.16.1",
                 "type": "drupal-library",
-                "extra": {
-                    "installer-name": "ckeditor.fakeobjects"
-                },
                 "dist": {
                     "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.16.1.zip",
                     "type": "zip"
@@ -111,9 +102,6 @@
                 "name": "ckeditor/image",
                 "version": "4.16.1",
                 "type": "drupal-library",
-                "extra": {
-                    "installer-name": "ckeditor.image"
-                },
                 "dist": {
                     "url": "https://download.ckeditor.com/image/releases/image_4.16.1.zip",
                     "type": "zip"
@@ -130,9 +118,6 @@
                 "name": "ckeditor/link",
                 "version": "4.16.1",
                 "type": "drupal-library",
-                "extra": {
-                    "installer-name": "ckeditor.link"
-                },
                 "dist": {
                     "url": "https://download.ckeditor.com/link/releases/link_4.16.1.zip",
                     "type": "zip"
@@ -271,6 +256,30 @@
                     "composer/installers": "~1.0"
                 }
             }
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "docroot/core": [
+                "type:drupal-core"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
         }
     }
 }
