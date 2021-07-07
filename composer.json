@@ -7,11 +7,11 @@
         "dpc-sdp/tide_core": "^2.0.0",
         "drupal/token_conditions": "dev-1.x",
         "drupal/webform": "^5.14",
-        "choices/choices": "*",
-        "codemirror/codemirror": "*",
-        "jquery/inputmask": "*",
-        "jquery/intl-tel-input": "*",
-        "progress-tracker/progress-tracker": "*"
+        "choices/choices": "9.0.1",
+        "codemirror/codemirror": "5.53.2",
+        "jquery/inputmask": "5.0.5",
+        "jquery/intl-tel-input": "16.1.0",
+        "progress-tracker/progress-tracker": "1.4.0"
     },
     "suggest": {
         "dpc-sdp/tide_api:^1.5.0": "Allows to use Drupal in headless mode"
