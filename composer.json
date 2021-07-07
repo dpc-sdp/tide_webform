@@ -8,16 +8,9 @@
         "drupal/token_conditions": "dev-1.x",
         "drupal/webform": "^5.14",
         "choices/choices": "*",
-        "ckeditor/autogrow": "*",
-        "ckeditor/codemirror": "*",
-        "ckeditor/fakeobjects": "*",
-        "ckeditor/image": "*",
-        "ckeditor/link": "*",
         "codemirror/codemirror": "*",
         "jquery/inputmask": "*",
         "jquery/intl-tel-input": "*",
-        "jquery/textcounter": "*",
-        "jquery/timepicker": "*",
         "progress-tracker/progress-tracker": "*"
     },
     "suggest": {
