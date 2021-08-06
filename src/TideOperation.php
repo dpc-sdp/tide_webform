@@ -1,7 +1,14 @@
 <?php
 
+namespace Drupal\tide_webform;
+
+/**
+ * Helper class for install/update functions.
+ */
 class TideOperation {
-  public static function install_webform_config() {
+
+  // Ensure that unsupported elements are hidden.
+  public static function installWebformConfig() {
     if (\Drupal::moduleHandler()->moduleExists('webform')) {
       $webform_elements = [
         'checkboxes',

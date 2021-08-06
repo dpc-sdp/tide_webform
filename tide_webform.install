@@ -13,7 +13,7 @@ use Drupal\tide_webform\TideOperation;
  * Implements hook_install().
  */
 function tide_webform_install() {
-  TideOperation::install_webform_config();
+  TideOperation::installWebformConfig();
 }
 
 /**
