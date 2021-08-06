@@ -7,14 +7,13 @@
 
 use Drupal\webform\Entity\Webform;
 use Drupal\block\Entity\Block;
+use Drupal\tide_webform\TideOperation;
 
 /**
  * Implements hook_install().
  */
 function tide_webform_install() {
-  module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_webform') . '/config/optional'];
-  _tide_import_single_config('webform.settings', $config_location);
+  TideOperation::install_webform_config();
 }
 
 /**
