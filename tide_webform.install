@@ -7,6 +7,14 @@
 
 use Drupal\webform\Entity\Webform;
 use Drupal\block\Entity\Block;
+use Drupal\tide_webform\TideOperation;
+
+/**
+ * Implements hook_install().
+ */
+function tide_webform_install() {
+  TideOperation::installWebformConfig();
+}
 
 /**
  * Load default config values.
