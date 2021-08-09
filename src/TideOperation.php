@@ -7,7 +7,9 @@ namespace Drupal\tide_webform;
  */
 class TideOperation {
 
-  // Ensure that unsupported elements are hidden.
+  /**
+   * Ensure that unsupported elements are hidden.
+   */
   public static function installWebformConfig() {
     if (\Drupal::moduleHandler()->moduleExists('webform')) {
       $webform_elements = [
@@ -82,4 +84,5 @@ class TideOperation {
       $config->save();
     }
   }
+  
 }
