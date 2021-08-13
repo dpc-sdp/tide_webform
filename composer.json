@@ -4,9 +4,9 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
-        "dpc-sdp/tide_core": "^2.0.0",
-        "drupal/token_conditions": "dev-1.x",
-        "drupal/webform": "^5.14",
+        "dpc-sdp/tide_core": "dev-feature/SDPA-5396-drupalcore-9 as 2.0.14",
+        "drupal/token_conditions": "dev-compatible-with-drupal-9",
+        "drupal/webform": "^6.0",
         "choices/choices": "9.0.1",
         "codemirror/codemirror": "5.53.2",
         "jquery/inputmask": "5.0.5",
@@ -14,7 +14,7 @@
         "progress-tracker/progress-tracker": "1.4.0"
     },
     "suggest": {
-        "dpc-sdp/tide_api:^1.5.0": "Allows to use Drupal in headless mode"
+        "dpc-sdp/tide_api:dev-compatible-with-drupal-9": "Allows to use Drupal in headless mode"
     },
     "repositories": {
         "drupal": {
@@ -115,6 +115,11 @@
                     "composer/installers": "~1.0"
                 }
             }
+        },
+        "drupal/token_conditions": {
+            "type": "vcs",
+            "no-api": true,
+            "url": "https://github.com/dpc-sdp/token_conditions"
         }
     }
 }
