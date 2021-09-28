@@ -6,7 +6,7 @@
     "require": {
         "dpc-sdp/tide_core": "dev-feature/SDPA-5396-drupalcore-9 as 2.0.14",
         "drupal/token_conditions": "dev-compatible-with-drupal-9",
-        "drupal/webform": "^6.0",
+        "drupal/webform": "^6.1@beta",
         "choices/choices": "9.0.1",
         "codemirror/codemirror": "5.53.2",
         "jquery/inputmask": "5.0.5",
