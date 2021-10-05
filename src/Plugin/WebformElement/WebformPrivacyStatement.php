@@ -47,7 +47,10 @@ class WebformPrivacyStatement extends Checkbox {
    * {@inheritdoc}
    */
   public function getTranslatableProperties() {
-    return array_merge(parent::getTranslatableProperties(), ['privacy_statement_heading', 'privacy_statement_content']);
+    return array_merge(parent::getTranslatableProperties(), [
+      'privacy_statement_heading',
+      'privacy_statement_content',
+    ]);
   }
 
   /**
