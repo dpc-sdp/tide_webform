@@ -75,7 +75,10 @@ class WebformPrivacyStatement extends Checkbox {
     $element['#type'] = 'checkbox';
     $element['#wrapper_attributes']['class'][] = 'form-type-webform-privacy-statement';
 
-    $element['#element_validate'][] = [get_called_class(), 'validateWebformPrivacyStatement'];
+    $element['#element_validate'][] = [
+      get_called_class(),
+      'validateWebformPrivacyStatement',
+    ];
 
     return $element;
   }
