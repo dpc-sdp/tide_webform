@@ -5,7 +5,7 @@ Feature: JSON API Webform
 
   Scenario: Send GET request to retrieve the Content Rating form
     When I send a GET request to "/api/v1/webform/webform?filter[drupal_internal__id][value]=tide_webform_content_rating"
-    Then the rest response status code should be 200
+    Then the response code should be 200
     And the response should be in JSON
     And the JSON node "meta.count" should exist
     And the JSON node "data" should exist
@@ -31,7 +31,7 @@ Feature: JSON API Webform
           }
         }
         """
-    Then the rest response status code should be 201
+    Then the response code should be 201
     And the response should be in JSON
     And the JSON node "data.type" should be equal to "webform_submission--tide_webform_content_rating"
     And the JSON node "data.id" should exist
