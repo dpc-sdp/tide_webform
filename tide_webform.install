@@ -224,7 +224,7 @@ function tide_webform_update_8007() {
 /**
  * Updating service version.
  */
-function vicgovau_core_update_8049() {
+function tide_webform_update_8008() {
   if (\Drupal::moduleHandler()->moduleExists('tide_webform')) {
     $config_factory = \Drupal::configFactory();
     $config = $config_factory->getEditable('tide_webform.defaults');
