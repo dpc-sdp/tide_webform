@@ -220,3 +220,17 @@ function tide_webform_update_8007() {
     $block->save();
   }
 }
+
+/**
+ * Updating service version.
+ */
+function vicgovau_core_update_8049() {
+  if (\Drupal::moduleHandler()->moduleExists('tide_webform')) {
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('tide_webform.defaults');
+    $content = $config->get('privacy_statement.content');
+    $content_value = str_replace("8", "9", $content);
+    $config->set('privacy_statement.content', $content_value);
+    $config->save();
+  }
+}
