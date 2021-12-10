@@ -236,7 +236,7 @@ function tide_webform_update_8008() {
 }
 
 /**
- * Updating service version on existing webform
+ * Updating service version on existing webform.
  */
 function tide_webform_update_8009() {
   if (\Drupal::moduleHandler()->moduleExists('webform')) {
