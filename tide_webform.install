@@ -234,3 +234,20 @@ function tide_webform_update_8008() {
     $config->save();
   }
 }
+
+/**
+ * Updating service version on existing webform
+ */
+function tide_webform_update_8009() {
+  if (\Drupal::moduleHandler()->moduleExists('webform')) {
+    $config_factory = \Drupal::configFactory();
+    $config_lists = $config_factory->listAll('webform.webform.');
+    foreach ($config_lists as $config_list) {
+      $config = $config_factory->getEditable($config_list);
+      $content = $config->get('elements');
+      $content_value = str_replace("Drupal 8", "Drupal 9", $content);
+      $config->set('elements', $content_value);
+      $config->save();
+    }
+  }
+}
