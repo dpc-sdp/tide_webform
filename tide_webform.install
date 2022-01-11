@@ -239,8 +239,8 @@ function tide_webform_update_8008() {
  * Updating service version on existing webform.
  */
 function tide_webform_update_8009() {
-  $search = ['Drupal 8', 'Amazon Web Services'];
-  $replace = ['Drupal 9', 'Microsoft Azure'];
+  $search = ['Drupal 8', 'Amazon Web Services', ' (AWS)'];
+  $replace = ['Drupal 9', 'Microsoft Azure', ''];
   $config_factory = \Drupal::configFactory();
   $config_lists = $config_factory->listAll('webform.webform.');
   foreach ($config_lists as $config_list) {
