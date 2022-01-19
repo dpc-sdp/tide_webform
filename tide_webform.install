@@ -220,3 +220,34 @@ function tide_webform_update_8007() {
     $block->save();
   }
 }
+
+/**
+ * Updating service version.
+ */
+function tide_webform_update_8008() {
+  $search = ['Drupal 8', 'Amazon Web Services'];
+  $replace = ['Drupal 9', 'Microsoft Azure'];
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('tide_webform.defaults');
+  $content = $config->get('privacy_statement.content');
+  $content_value = str_replace($search, $replace, $content);
+  $config->set('privacy_statement.content', $content_value);
+  $config->save();
+}
+
+/**
+ * Updating service version on existing webform.
+ */
+function tide_webform_update_8009() {
+  $search = ['Drupal 8', 'Amazon Web Services', ' (AWS)'];
+  $replace = ['Drupal 9', 'Microsoft Azure', ''];
+  $config_factory = \Drupal::configFactory();
+  $config_lists = $config_factory->listAll('webform.webform.');
+  foreach ($config_lists as $config_list) {
+    $config = $config_factory->getEditable($config_list);
+    $content = $config->get('elements');
+    $content_value = str_replace($search, $replace, $content);
+    $config->set('elements', $content_value);
+    $config->save();
+  }
+}
