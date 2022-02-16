@@ -15,9 +15,6 @@
     },
     "extra": {
         "patches": {
-            "drupal/webform": {
-                "CKEditor Codemirror is still loaded from the CDN even if the library exists in /libraries": "https://www.drupal.org/files/issues/2021-12-20/webform_libraries_3254856.patch"
-            }
         }
     },
     "suggest": {
