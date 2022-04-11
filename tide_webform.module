@@ -13,6 +13,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformSubmissionForm;
+use Drupal\webform\WebformException;
 
 /**
  * Implements hook_config_ignore_settings_alter().
@@ -218,6 +219,23 @@ function tide_webform_form_webform_add_form_alter(&$form, FormStateInterface $fo
  */
 function tide_webform_webform_submission_presave(WebformSubmission $webform_submission) {
   $elements = $webform_submission->getWebform()->getElementsDecoded();
+  // Entity API field 'was_this_page_help' validation.
+  $field_id = 'was_this_page_helpful';
+  if (isset($elements[$field_id])) {
+    $webform = $webform_submission->getWebform();
+    $element_data = $webform_submission->getElementData($field_id);
+    if ($element_data === NULL) {
+      // Throw missing field exception.
+      throw new WebformException($elements[$field_id]['#title'] . ' field is missing.');
+    }
+    else {
+      $elements_flatten_value = $webform->getElementsInitializedFlattenedAndHasValue();
+      if (!in_array($element_data, $elements_flatten_value[$field_id]['#options'])) {
+        // Throw invalid value exception.
+        throw new WebformException($elements[$field_id]['#title'] . ' has invalid value.');
+      }
+    }
+  }
   $errors = WebformSubmissionForm::validateWebformSubmission($webform_submission);
   if ($errors) {
     foreach ($elements as $key => $element) {
