@@ -40,6 +40,17 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
   if ($form_id == 'webform_ui_element_form') {
     $form['#after_build'][] = 'tide_webform_webform_ui_element_form_after_build';
   }
+
+  if ($form_id == 'webform_submission_contact_notes_form') {
+    $form['processed'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Is this submission downloaded'),
+      '#description' => t('If checked, this submission will be flagged as sownloaded'),
+      /*'#default_value' => $webform_submission->isProcessed(),*/
+      '#return_value' => TRUE,
+    ];
+    $form['actions']['submit']['#submit'][] = 'tide_webform_form_notes_submit';
+  }
 }
 
 /**
@@ -226,4 +237,18 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
       }
     }
   }
+}
+
+/**
+ * Submit callback.
+ *
+ * @param array $form
+ *   The form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   Form state.
+ */
+function tide_webform_form_notes_submit(array $form, FormStateInterface $form_state) {
+  print_r('im awesome');
+  exit();
+  //Get value of "submitted checkbox' and save as code - find save function for star/flag status.
 }
