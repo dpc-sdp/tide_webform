@@ -42,11 +42,12 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
   }
 
   if ($form_id == 'webform_submission_contact_notes_form') {
+    $webform_submission = \Drupal::entityTypeManager()->getStorage('webform_submission')->load(1);
     $form['processed'] = [
       '#type' => 'checkbox',
       '#title' => t('Is this submission downloaded'),
-      '#description' => t('If checked, this submission will be flagged as sownloaded'),
-      /*'#default_value' => $webform_submission->isProcessed(),*/
+      '#description' => t('If checked, this submission will be flagged as downloaded'),
+      /*'#default_value' => $webform_submission->get('processed')->value,*/
       '#return_value' => TRUE,
     ];
     $form['actions']['submit']['#submit'][] = 'tide_webform_form_notes_submit';
@@ -162,6 +163,32 @@ function tide_webform_entity_base_field_info_alter(&$fields, EntityTypeInterface
     }
   }
 }
+/**
+ * Implements hook_entity_base_field_info().
+ *
+ * @see \Drupal\webform\Entity\WebformSubmission::baseFieldDefinitions()
+ */
+function tide_webform_entity_base_field_info(EntityTypeInterface $entity_type) {
+
+  $fields = array();
+
+  if ($entity_type->id() == 'webform_submission') {
+    $fields['processed'] = BaseFieldDefinition::create('boolean')
+    ->setName('Processed')
+    ->setLabel(t('Processed'))
+    ->setDescription(t('A flag that indicates whether the submission has been downloaded'))
+    ->setDefaultValue(FALSE)
+    ->setDisplayOptions('form', array(
+      'type' => 'boolean_checkbox',
+      'settings' => array(
+        'display_label' => TRUE,
+      ),
+    ))
+    ->setDisplayConfigurable('form', TRUE);
+  }
+
+  return $fields;
+}
 
 /**
  * Implements hook_ENTITY_TYPE_create_access().
@@ -248,7 +275,10 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
  *   Form state.
  */
 function tide_webform_form_notes_submit(array $form, FormStateInterface $form_state) {
-  print_r('im awesome');
-  exit();
+  $webform_submission = \Drupal::entityTypeManager()->getStorage('webform_submission')->load(1);
+  $processed = $form_state->getValue('processed');
+
+  /*$webform_submission->set('processed')->$processed;*/
+
   //Get value of "submitted checkbox' and save as code - find save function for star/flag status.
 }
