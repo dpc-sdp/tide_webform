@@ -41,16 +41,11 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
     $form['#after_build'][] = 'tide_webform_webform_ui_element_form_after_build';
   }
 
-  if ($form_id == 'webform_submission_contact_notes_form') {
-    $webform_submission = \Drupal::entityTypeManager()->getStorage('webform_submission')->load(1);
-    $form['processed'] = [
-      '#type' => 'checkbox',
-      '#title' => t('Is this submission downloaded'),
-      '#description' => t('If checked, this submission will be flagged as downloaded'),
-      /*'#default_value' => $webform_submission->get('processed')->value,*/
-      '#return_value' => TRUE,
-    ];
-    $form['actions']['submit']['#submit'][] = 'tide_webform_form_notes_submit';
+  if ($form_id == 'webform_submission_filter_form') {
+    $options = $form['filter']['state']['#options'];
+    $options['processed'] = 'Processed ['.\Drupal::entityQuery('webform_submission')->condition('processed', '1')->count()->execute().']';
+    $options['unprocessed'] = 'Unprocessed ['.\Drupal::entityQuery('webform_submission')->condition('processed', '0')->count()->execute().']';
+    $form['filter']['state']['#options'] = $options;
   }
 }
 
@@ -267,18 +262,9 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
 }
 
 /**
- * Submit callback.
- *
- * @param array $form
- *   The form.
- * @param \Drupal\Core\Form\FormStateInterface $form_state
- *   Form state.
+ * Implements hook_entity_type_alter().
  */
-function tide_webform_form_notes_submit(array $form, FormStateInterface $form_state) {
-  $webform_submission = \Drupal::entityTypeManager()->getStorage('webform_submission')->load(1);
-  $processed = $form_state->getValue('processed');
-
-  /*$webform_submission->set('processed')->$processed;*/
-
-  //Get value of "submitted checkbox' and save as code - find save function for star/flag status.
+function tide_webform_entity_type_alter(array &$entity_types) {
+  /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
+  $entity_types['webform_submission']->setListBuilderClass('Drupal\tide_webform\TideWebformSubmissionListBuilder');
 }

@@ -9,6 +9,7 @@ use Drupal\webform\Entity\Webform;
 use Drupal\block\Entity\Block;
 use Drupal\tide_webform\TideOperation;
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Database\Database;
 
 /**
  * Implements hook_install().
@@ -254,7 +255,7 @@ function tide_webform_update_8009() {
 }
 
 /**
- * Add 'processed' field to webforms
+ * Add 'processed' field to webforms.
  *
  * @return void
  */
@@ -267,3 +268,28 @@ function tide_webform_update_8010() {
 
   \Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('processed', 'webform_submission', 'webform', $storage_definition);
 }
+
+/**
+ * Add 'processed/unprocessed' actions to webform submissions actions.
+ *
+ * @return void
+ */
+function tide_webform_update_8011() {
+  $configs = [
+    'system.action.webform_submission_make_process_action' => 'action',
+    'system.action.webform_submission_make_unprocess_action' => 'action',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_webform') . '/config/optional'];
+
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $id = substr($config, strrpos($config, '.') + 1);
+    if ($storage->load($id) == NULL) {
+      $config_entity = $storage->createFromStorageRecord($config_read);
+      $config_entity->save();
+    }
+  }
+}
+
