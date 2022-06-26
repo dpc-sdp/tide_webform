@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
 
-    /**
+  /**
    * Submission state starred.
    */
   const STATE_PROCESSED = 'processed';
@@ -36,19 +36,18 @@ class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
 
   /**
    * {@inheritdoc}
-  */
-    protected function getQuery($keys = '', $state = '', $source_entity = ''){
-        $query = parent::getQuery($keys,$state,$source_entity);
-        switch ($state) {
-            case static::STATE_PROCESSED:
-              $query->condition('processed', 1);
-              break;
-
-            case static::STATE_UNPROCESSED:
-              $query->condition('processed', 0);
-              break;
-          }
-        return $query;
-    }
+   */
+  protected function getQuery($keys = '', $state = '', $source_entity = '') {
+    $query = parent::getQuery($keys, $state, $source_entity);
+    switch ($state) {
+      case static::STATE_PROCESSED:
+        $query->condition('processed', 1);
+        break;
+      case static::STATE_UNPROCESSED:
+        $query->condition('processed', 0);
+        break;
+      }
+    return $query;
+  }
 
 }

@@ -9,7 +9,6 @@ use Drupal\webform\Entity\Webform;
 use Drupal\block\Entity\Block;
 use Drupal\tide_webform\TideOperation;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Database\Database;
 
 /**
  * Implements hook_install().
@@ -257,14 +256,13 @@ function tide_webform_update_8009() {
 /**
  * Add 'processed' field to webforms.
  *
- * @return void
  */
 function tide_webform_update_8010() {
   $storage_definition = BaseFieldDefinition::create('boolean')
-      ->setName('Processed')
-      ->setLabel(t('Processed'))
-      ->setDescription(t('A flag that indicates whether the submission has been downloaded'))
-      ->setDefaultValue(FALSE);
+    ->setName('Processed')
+    ->setLabel(t('Processed'))
+    ->setDescription(t('A flag that indicates whether the submission has been downloaded'))
+    ->setDefaultValue(FALSE);
 
   \Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('processed', 'webform_submission', 'webform', $storage_definition);
 }
@@ -272,7 +270,6 @@ function tide_webform_update_8010() {
 /**
  * Add 'processed/unprocessed' actions to webform submissions actions.
  *
- * @return void
  */
 function tide_webform_update_8011() {
   $configs = [
@@ -292,4 +289,5 @@ function tide_webform_update_8011() {
     }
   }
 }
+
 
