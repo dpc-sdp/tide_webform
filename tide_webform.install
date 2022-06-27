@@ -254,7 +254,7 @@ function tide_webform_update_8009() {
 }
 
 /**
- * Add 'processed' field to webforms.
+ * Add 'processed' field to all webforms.
  *
  */
 function tide_webform_update_8010() {

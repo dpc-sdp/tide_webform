@@ -43,10 +43,22 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
 
   if ($form_id == 'webform_submission_filter_form') {
     $options = $form['filter']['state']['#options'];
-    $options['processed'] = 'Processed [' .\Drupal::entityQuery('webform_submission')->condition('processed', '1')->count()->execute(). ']';
-    $options['unprocessed'] = 'Unprocessed [' .\Drupal::entityQuery('webform_submission')->condition('processed', '0')->count()->execute(). ']';
+    $options['processed'] = 'Processed [' . \Drupal::entityQuery('webform_submission')->condition('processed', '1')->count()->execute() . ']';
+    $options['unprocessed'] = 'Unprocessed [' . \Drupal::entityQuery('webform_submission')->condition('processed', '0')->count()->execute() . ']';
     $form['filter']['state']['#options'] = $options;
   }
+
+  if (strstr($form_id, 'webform_submission') && strstr($form_id, 'notes_form')) {
+    $webform_submission = \Drupal::routeMatch()->getParameter('webform_submission');
+     $form['processed'] = [
+       '#type' => 'checkbox',
+       '#title' => t('Is this submission downloaded'),
+       '#description' => t('If checked, this submission will be flagged as downloaded'),
+       '#default_value' => tide_webform_get_processed($webform_submission),
+       '#return_value' => TRUE,
+     ];
+  }
+
 }
 
 /**
@@ -172,12 +184,6 @@ function tide_webform_entity_base_field_info(EntityTypeInterface $entity_type) {
       ->setLabel(t('Processed'))
       ->setDescription(t('A flag that indicates whether the submission has been downloaded'))
       ->setDefaultValue(FALSE)
-      ->setDisplayOptions('form', [
-        'type' => 'boolean_checkbox',
-        'settings' => [
-          'display_label' => FALSE,
-        ],
-      ])
       ->setDisplayConfigurable('form', FALSE);
   }
 
@@ -266,4 +272,19 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
 function tide_webform_entity_type_alter(array &$entity_types) {
   /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
   $entity_types['webform_submission']->setListBuilderClass('Drupal\tide_webform\TideWebformSubmissionListBuilder');
+}
+
+/**
+ * Function to get value of processed field.
+ *
+ * @param WebformSubmission $webform_submission
+ * @return $processed[0]['value]
+ */
+function tide_webform_get_processed(WebformSubmission $webform_submission){
+  $processed = $webform_submission->processed->getValue();
+  if ($processed == null) {
+    return 0;
+  } else {
+    return $processed[0]['value'];
+  }
 }
