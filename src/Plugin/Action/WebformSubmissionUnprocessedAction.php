@@ -9,7 +9,7 @@ use Drupal\Core\Session\AccountInterface;
  * Makes a webform submission unsticky.
  *
  * @Action(
- *   id = "webform_submission_unprocess_action",
+ *   id = "webform_submission_make_unprocess_action",
  *   label = @Translation("Unprocess submission"),
  *   type = "webform_submission"
  * )

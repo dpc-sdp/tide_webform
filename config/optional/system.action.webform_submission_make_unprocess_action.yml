@@ -6,5 +6,5 @@ dependencies:
 id: webform_submission_make_unprocess_action
 label: 'Unprocess submission'
 type: webform_submission
-plugin: webform_submission_unprocess_action
+plugin: webform_submission_make_unprocess_action
 configuration: {  }

@@ -41,12 +41,12 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
     $form['#after_build'][] = 'tide_webform_webform_ui_element_form_after_build';
   }
 
-  if ($form_id == 'webform_submission_filter_form') {
-    $options = $form['filter']['state']['#options'];
-    $options['processed'] = 'Processed [' . \Drupal::entityQuery('webform_submission')->condition('processed', '1')->count()->execute() . ']';
-    $options['unprocessed'] = 'Unprocessed [' . \Drupal::entityQuery('webform_submission')->condition('processed', '0')->count()->execute() . ']';
-    $form['filter']['state']['#options'] = $options;
-  }
+  // if ($form_id == 'webform_submission_filter_form') {
+  //   $options = $form['filter']['state']['#options'];
+  //   $options['processed'] = 'Processed [' . \Drupal::entityQuery('webform_submission')->condition('processed', '1')->count()->execute() . ']';
+  //   $options['unprocessed'] = 'Unprocessed [' . \Drupal::entityQuery('webform_submission')->condition('processed', '0')->count()->execute() . ']';
+  //   $form['filter']['state']['#options'] = $options;
+  // }
 
   if (strstr($form_id, 'webform_submission') && strstr($form_id, 'notes_form')) {
     $webform_submission = \Drupal::routeMatch()->getParameter('webform_submission');

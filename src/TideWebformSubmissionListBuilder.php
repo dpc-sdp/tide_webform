@@ -30,8 +30,20 @@ class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
     /** @var \Drupal\webform\TideWebformSubmissionListBuilder $instance */
     $instance = parent::createInstance($container, $entity_type);
 
-    $instance->initialize();
     return $instance;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function buildFilterForm() {
+    $formBuilder = parent::buildFilterForm();
+    $state_options = $formBuilder['filter']['state']['#options'];
+    $state_options[static::STATE_PROCESSED] = $this->t('Processed [@total]', ['@total' => $this->getTotal(NULL, static::STATE_PROCESSED, $this->sourceEntityTypeId)]);
+    $state_options[static::STATE_UNPROCESSED] = $this->t('Unprocessed [@total]', ['@total' => $this->getTotal(NULL, static::STATE_UNPROCESSED, $this->sourceEntityTypeId)]);
+
+    $formBuilder['filter']['state']['#options'] = $state_options;
+    return $formBuilder;
   }
 
   /**

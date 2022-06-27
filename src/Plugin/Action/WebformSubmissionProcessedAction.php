@@ -9,7 +9,7 @@ use Drupal\Core\Session\AccountInterface;
  * Makes a webform submission sticky.
  *
  * @Action(
- *   id = "webform_submission_process_action",
+ *   id = "webform_submission_make_process_action",
  *   label = @Translation("Process submission"),
  *   type = "webform_submission"
  * )
