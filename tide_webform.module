@@ -50,7 +50,7 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
 
   if (strstr($form_id, 'webform_submission') && strstr($form_id, 'notes_form')) {
     $webform_submission = \Drupal::routeMatch()->getParameter('webform_submission');
-     $form['processed'] = [
+    $form['processed'] = [
        '#type' => 'checkbox',
        '#title' => t('Is this submission downloaded'),
        '#description' => t('If checked, this submission will be flagged as downloaded'),
@@ -277,14 +277,18 @@ function tide_webform_entity_type_alter(array &$entity_types) {
 /**
  * Function to get value of processed field.
  *
- * @param WebformSubmission $webform_submission
- * @return $processed[0]['value]
+ * @param Drupal\webform\Entity\WebformSubmission $webform_submission
+ *   Webform submission.
+ *
+ * @return processed[0]['value']
+ *   Returns value of processed field from Webform Submission.
  */
 function tide_webform_get_processed(WebformSubmission $webform_submission){
   $processed = $webform_submission->processed->getValue();
-  if ($processed == null) {
+  if ($processed == NULL) {
     return 0;
   } else {
     return $processed[0]['value'];
   }
 }
+

@@ -255,7 +255,6 @@ function tide_webform_update_8009() {
 
 /**
  * Add 'processed' field to all webforms.
- *
  */
 function tide_webform_update_8010() {
   $storage_definition = BaseFieldDefinition::create('boolean')
@@ -269,7 +268,6 @@ function tide_webform_update_8010() {
 
 /**
  * Add 'processed/unprocessed' actions to webform submissions actions.
- *
  */
 function tide_webform_update_8011() {
   $configs = [
@@ -289,5 +287,3 @@ function tide_webform_update_8011() {
     }
   }
 }
-
-

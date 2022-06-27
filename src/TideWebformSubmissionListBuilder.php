@@ -43,10 +43,12 @@ class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
       case static::STATE_PROCESSED:
         $query->condition('processed', 1);
         break;
+
       case static::STATE_UNPROCESSED:
         $query->condition('processed', 0);
         break;
-      }
+
+    }
     return $query;
   }
 
