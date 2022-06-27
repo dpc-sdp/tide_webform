@@ -283,7 +283,7 @@ function tide_webform_entity_type_alter(array &$entity_types) {
  * @return processed[0][value]
  *   Returns value of processed field from Webform Submission.
  */
-function tide_webform_get_processed (WebformSubmission $webform_submission){
+function tide_webform_get_processed(WebformSubmission $webform_submission) {
   $processed = $webform_submission->processed->getValue();
   if ($processed == NULL) {
     return 0;
