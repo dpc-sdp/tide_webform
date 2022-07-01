@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformSubmissionForm;
@@ -57,6 +58,22 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
       '#default_value' => tide_webform_get_processed($webform_submission),
       '#return_value' => TRUE,
     ];
+  }
+
+  if ($form_id == 'webform_results_export') {
+    $form['export']['download']['processed'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Only download unprocessed submissions'),
+      '#default_value' => TRUE,
+    ];
+    $form['export']['download']['process_submissions'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Downloaded submissions are marked as processed'),
+      '#default_value' => TRUE,
+    ];
+
+    $form['#submit'][] = 'tide_webform_form_webform_results_export_form_submit';
+
   }
 
 }
@@ -310,4 +327,23 @@ function tide_webform_submission_filter_query($value) {
   $query->count();
   $total = $query->execute();
   return $total;
+}
+
+/**
+ * Submit callback.
+ *
+ * @param array $form
+ *   The form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   Form state.
+ */
+function tide_webform_form_webform_results_export_form_submit(array $form, FormStateInterface $form_state) {
+  $processed = $form_state->getValue('processed');
+  $route = $form_state->getRedirect();
+  $route_parameters = $route->getRouteParameters();
+  $options = $route->getOptions();
+  $query = $options['query'];
+  $query['processed'] = $processed;
+  $options = ['query' => $query];
+  $form_state->setRedirect('entity.webform.results_export', $route_parameters, $options);
 }
