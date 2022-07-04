@@ -28,21 +28,21 @@ class TideWebformSubmissionExporter extends WebformSubmissionExporter {
    * TideWebformSubmissionExporter function.
    *
    * @param \Drupal\webform\Plugin\WebformSubmissionExporterInterface $webformSubmissionExporter
-   *   Lsdfsdf.
+   *   The webform submission exporter interface.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   Lsdfsdf.
+   *   The configuration object factory.
    * @param \Drupal\Core\File\FileSystemInterface $file_system
-   *   Lsdfsdf.
+   *   File system service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   Lsdfsdf.
+   *   The entity type manager.
    * @param \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager
-   *   Lsdfsdf.
+   *   The stream wrapper manager.
    * @param \Drupal\Core\Archiver\ArchiverManager $archiver_manager
-   *   Lsdfsdf.
+   *   The archiver manager.
    * @param \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager
-   *   Lsdfsdf.
+   *   The webform element manager.
    * @param \Drupal\webform\Plugin\WebformExporterManagerInterface $exporter_manager
-   *   Lsdfsdf.
+   *   The results exporter manager.
    */
   public function __construct(WebformSubmissionExporterInterface $webformSubmissionExporter, ConfigFactoryInterface $config_factory, FileSystemInterface $file_system, EntityTypeManagerInterface $entity_type_manager, StreamWrapperManagerInterface $stream_wrapper_manager, ArchiverManager $archiver_manager, WebformElementManagerInterface $element_manager, WebformExporterManagerInterface $exporter_manager) {
     $this->webformSubmissionExporter = $webformSubmissionExporter;
@@ -53,8 +53,16 @@ class TideWebformSubmissionExporter extends WebformSubmissionExporter {
    * {@inheritdoc}
    */
   public function getQuery() {
-    parent::getQuery();
-    print "Decorator PROTECT Protected\n";
+    $query = parent::getQuery();
+    $export_options = $this->getExportOptions();
+
+    $webform = $this->getWebform();
+    $source_entity = $this->getSourceEntity();
+
+    if ($export_options['processed']) {
+      $query->condition('processed', 0);
+    }
+    return $query;
   }
 
 }
