@@ -56,9 +56,6 @@ class TideWebformSubmissionExporter extends WebformSubmissionExporter {
     $query = parent::getQuery();
     $export_options = $this->getExportOptions();
 
-    $webform = $this->getWebform();
-    $source_entity = $this->getSourceEntity();
-
     if ($export_options['processed']) {
       $query->condition('processed', 0);
     }

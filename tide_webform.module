@@ -66,11 +66,6 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
       '#title' => t('Only download unprocessed submissions'),
       '#default_value' => TRUE,
     ];
-    $form['export']['download']['process_submissions'] = [
-      '#type' => 'checkbox',
-      '#title' => t('Downloaded submissions are marked as processed'),
-      '#default_value' => TRUE,
-    ];
 
     $form['#submit'][] = 'tide_webform_form_webform_results_export_form_submit';
 
