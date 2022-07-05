@@ -61,9 +61,14 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
   }
 
   if ($form_id == 'webform_results_export') {
-    $form['export']['download']['processed'] = [
+    $form['export']['download']['unprocessed_submissions'] = [
       '#type' => 'checkbox',
       '#title' => t('Only download unprocessed submissions'),
+      '#default_value' => TRUE,
+    ];
+    $form['export']['download']['process_submissions'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Download submissions are marked as processed'),
       '#default_value' => TRUE,
     ];
 
@@ -333,12 +338,14 @@ function tide_webform_submission_filter_query($value) {
  *   Form state.
  */
 function tide_webform_form_webform_results_export_form_submit(array $form, FormStateInterface $form_state) {
-  $processed = $form_state->getValue('processed');
+  $unprocessed_submissions = $form_state->getValue('unprocessed_submissions');
+  $process_submissions = $form_state->getValue('process_submissions');
   $route = $form_state->getRedirect();
   $route_parameters = $route->getRouteParameters();
   $options = $route->getOptions();
   $query = $options['query'];
-  $query['processed'] = $processed;
+  $query['unprocessed_submissions'] = $unprocessed_submissions;
+  $query['process_submissions'] = $process_submissions;
   $options = ['query' => $query];
   $form_state->setRedirect('entity.webform.results_export', $route_parameters, $options);
 }

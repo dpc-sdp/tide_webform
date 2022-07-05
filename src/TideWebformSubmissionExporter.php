@@ -11,6 +11,7 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Plugin\WebformExporterManagerInterface;
+use Drupal\webform\Entity\WebformSubmission;
 
 /**
  * Webform submission exporter.
@@ -56,10 +57,29 @@ class TideWebformSubmissionExporter extends WebformSubmissionExporter {
     $query = parent::getQuery();
     $export_options = $this->getExportOptions();
 
-    if ($export_options['processed']) {
+    if ($export_options['unprocessed_submissions']) {
       $query->condition('processed', 0);
     }
     return $query;
+  }
+
+    /**
+   * {@inheritdoc}
+   */
+  public function generate() {
+    parent::generate();
+    $export_options = $this->getExportOptions();
+    if ($export_options['process_submissions']) {
+      $entity_ids = $this->getQuery()->execute();
+      $webform_submissions = WebformSubmission::loadMultiple($entity_ids);
+      foreach ($webform_submissions as $webform_submission) {
+        $processed_value = $webform_submission->processed->getValue()[0]['value'];
+        if ($processed_value == "0") {
+          $webform_submission->processed->setValue("1");
+          $webform_submission->save();
+        }
+      }
+    }
   }
 
 }
