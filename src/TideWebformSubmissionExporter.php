@@ -69,9 +69,9 @@ class TideWebformSubmissionExporter extends WebformSubmissionExporter {
   public function generate() {
     parent::generate();
     $export_options = $this->getExportOptions();
+    $entity_ids = $this->getQuery()->execute();
+    $webform_submissions = WebformSubmission::loadMultiple($entity_ids);
     if ($export_options['process_submissions']) {
-      $entity_ids = $this->getQuery()->execute();
-      $webform_submissions = WebformSubmission::loadMultiple($entity_ids);
       foreach ($webform_submissions as $webform_submission) {
         $processed_value = $webform_submission->processed->getValue()[0]['value'];
         if ($processed_value == "0") {
@@ -80,6 +80,24 @@ class TideWebformSubmissionExporter extends WebformSubmissionExporter {
         }
       }
     }
-  }
 
+    $account = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+
+    \Drupal::logger('tide_webform')->notice('@user exported @number webform submissions',
+    [
+      '@user' => $account->getDisplayName(),
+      '@number' => count($entity_ids)
+    ]);
+
+    $log = [
+      'type' => 'tide_webform',
+      'operation' => 'download',
+      'description' => t('event: @user exported @number webform submissions', [
+        '@user' => $account->getDisplayName(),
+        '@number' => count($entity_ids)
+      ]),
+      'ref_char' => $export_options['webform']->id(),
+    ];
+    admin_audit_trail_insert($log);
+  }
 }

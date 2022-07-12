@@ -2,6 +2,7 @@
 
 namespace Drupal\tide_webform;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\webform\WebformSubmissionListBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -36,19 +37,6 @@ class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
   /**
    * {@inheritdoc}
    */
-  // protected function buildFilterForm() {
-  //   $formBuilder = parent::buildFilterForm();
-  //   $state_options = $formBuilder['filter']['state']['#options'];
-  //   $state_options[static::STATE_PROCESSED] = $this->t('Processed [@total]', ['@total' => $this->getTotal(NULL, static::STATE_PROCESSED, $this->sourceEntityTypeId)]);
-  //   $state_options[static::STATE_UNPROCESSED] = $this->t('Unprocessed [@total]', ['@total' => $this->getTotal(NULL, static::STATE_UNPROCESSED, $this->sourceEntityTypeId)]);
-
-  //   $formBuilder['filter']['state']['#options'] = $state_options;
-  //   return $formBuilder;
-  // }
-
-  /**
-   * {@inheritdoc}
-   */
   protected function getQuery($keys = '', $state = '', $source_entity = '') {
     $query = parent::getQuery($keys, $state, $source_entity);
     switch ($state) {
@@ -62,6 +50,21 @@ class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
 
     }
     return $query;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildHeader() {
+    $columns = $this->columns;
+    $columns['processed'] = [
+      'title' => $this->t('processed')
+    ];
+    $columns['processed']['name'] = 'processed';
+    $columns['processed']['format'] = 'value';
+    $this->columns = $columns;
+    $this->header = parent::buildHeader();
+    return $this->header;
   }
 
 }
