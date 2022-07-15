@@ -58,13 +58,55 @@ class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
   public function buildHeader() {
     $columns = $this->columns;
     $columns['processed'] = [
-      'title' => $this->t('processed')
+      'title' => $this->t('Export Status'),
     ];
     $columns['processed']['name'] = 'processed';
     $columns['processed']['format'] = 'value';
-    $this->columns = $columns;
-    $this->header = parent::buildHeader();
-    return $this->header;
+    $newOrder = ['processed' => $columns['processed']] + $columns;
+    $this->columns = $newOrder;
+    return parent::buildHeader();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildRowColumn(array $column, EntityInterface $entity) {
+    /** @var \Drupal\webform\WebformSubmissionInterface $entity */
+
+    $name = $column['name'];
+
+    switch ($name) {
+      case 'processed':
+        return $this->getProcessedValue($entity);
+
+      default:
+        return parent::buildRowColumn($column, $entity);
+
+    }
+  }
+
+  /**
+   * Custom function to get value of processed field.
+   *
+   * @param Drupal\Core\Entity\EntityInterface $entity
+   *   The webform submission entity.
+   */
+  public function getProcessedValue(EntityInterface $entity) {
+    /** @var \Drupal\webform\WebformSubmissionInterface $entity */
+
+    $value = $entity->processed->value;
+
+    switch ($value) {
+      case '0':
+        return 'Unprocessed';
+
+      case '1':
+        return 'Processed';
+
+      default:
+        return 'Unprocessed';
+
+    }
   }
 
 }

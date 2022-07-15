@@ -12,6 +12,7 @@ use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Plugin\WebformExporterManagerInterface;
 use Drupal\webform\Entity\WebformSubmission;
+use Drupal\user\Entity\User;
 
 /**
  * Webform submission exporter.
@@ -63,15 +64,15 @@ class TideWebformSubmissionExporter extends WebformSubmissionExporter {
     return $query;
   }
 
-    /**
+  /**
    * {@inheritdoc}
    */
   public function generate() {
     parent::generate();
     $export_options = $this->getExportOptions();
     $entity_ids = $this->getQuery()->execute();
-    $webform_submissions = WebformSubmission::loadMultiple($entity_ids);
     if ($export_options['process_submissions']) {
+      $webform_submissions = WebformSubmission::loadMultiple($entity_ids);
       foreach ($webform_submissions as $webform_submission) {
         $processed_value = $webform_submission->processed->getValue()[0]['value'];
         if ($processed_value == "0") {
@@ -81,12 +82,19 @@ class TideWebformSubmissionExporter extends WebformSubmissionExporter {
       }
     }
 
-    $account = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+    $this->logExport($entity_ids, $export_options);
+  }
+
+  /**
+   * Log export information to audit trail and Drupal logger.
+   */
+  public function logExport($entity_ids, $export_options) {
+    $account = User::load(\Drupal::currentUser()->id());
 
     \Drupal::logger('tide_webform')->notice('@user exported @number webform submissions',
     [
       '@user' => $account->getDisplayName(),
-      '@number' => count($entity_ids)
+      '@number' => count($entity_ids),
     ]);
 
     $log = [
@@ -94,10 +102,12 @@ class TideWebformSubmissionExporter extends WebformSubmissionExporter {
       'operation' => 'download',
       'description' => t('event: @user exported @number webform submissions', [
         '@user' => $account->getDisplayName(),
-        '@number' => count($entity_ids)
+        '@number' => count($entity_ids),
       ]),
       'ref_char' => $export_options['webform']->id(),
     ];
     admin_audit_trail_insert($log);
+
   }
+
 }
