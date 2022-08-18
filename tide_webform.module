@@ -40,6 +40,41 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
   if ($form_id == 'webform_ui_element_form') {
     $form['#after_build'][] = 'tide_webform_webform_ui_element_form_after_build';
   }
+
+  if ($form_id == 'webform_submission_filter_form') {
+    $options = $form['filter']['state']['#options'];
+    $options['processed'] = 'Processed [' . tide_webform_submission_filter_query(1) . ']';
+    $options['unprocessed'] = 'Unprocessed [' . tide_webform_submission_filter_query(0) . ']';
+    $form['filter']['state']['#options'] = $options;
+  }
+
+  if (strstr($form_id, 'webform_submission') && strstr($form_id, 'notes_form')) {
+    $webform_submission = \Drupal::routeMatch()->getParameter('webform_submission');
+    $form['processed'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Is this submission downloaded'),
+      '#description' => t('If checked, this submission will be flagged as downloaded'),
+      '#default_value' => tide_webform_get_processed($webform_submission),
+      '#return_value' => TRUE,
+    ];
+  }
+
+  if ($form_id == 'webform_results_export') {
+    $form['export']['download']['unprocessed_submissions'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Only download unprocessed submissions'),
+      '#default_value' => TRUE,
+    ];
+    $form['export']['download']['process_submissions'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Download submissions are marked as processed'),
+      '#default_value' => TRUE,
+    ];
+
+    $form['#submit'][] = 'tide_webform_form_webform_results_export_form_submit';
+
+  }
+
 }
 
 /**
@@ -153,6 +188,25 @@ function tide_webform_entity_base_field_info_alter(&$fields, EntityTypeInterface
 }
 
 /**
+ * Implements hook_entity_base_field_info().
+ *
+ * @see \Drupal\webform\Entity\WebformSubmission::baseFieldDefinitions()
+ */
+function tide_webform_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+  if ($entity_type->id() == 'webform_submission') {
+    $fields['processed'] = BaseFieldDefinition::create('boolean')
+      ->setName('Processed')
+      ->setLabel(t('Processed'))
+      ->setDescription(t('A flag that indicates whether the submission has been downloaded'))
+      ->setDefaultValue(FALSE)
+      ->setDisplayConfigurable('form', FALSE);
+  }
+
+  return $fields;
+}
+
+/**
  * Implements hook_ENTITY_TYPE_create_access().
  *
  * @see \Drupal\webform\WebformSubmissionAccessControlHandler::checkAccess()
@@ -226,4 +280,71 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
       }
     }
   }
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function tide_webform_entity_type_alter(array &$entity_types) {
+  /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
+  $entity_types['webform_submission']->setListBuilderClass('Drupal\tide_webform\TideWebformSubmissionListBuilder');
+}
+
+/**
+ * Function to get value of processed field.
+ *
+ * @param Drupal\webform\Entity\WebformSubmission $webform_submission
+ *   Webform submission.
+ *
+ * @return processed[0][value]
+ *   Returns value of processed field from Webform Submission.
+ */
+function tide_webform_get_processed(WebformSubmission $webform_submission) {
+  $processed = $webform_submission->processed->getValue();
+  if ($processed == NULL) {
+    return 0;
+  }
+  else {
+    return $processed[0]['value'];
+  }
+}
+
+/**
+ * Function to build query for filter on webform submissions pages.
+ *
+ * @return total
+ *   Returns total from the webform submission count.
+ */
+function tide_webform_submission_filter_query($value) {
+  $query = \Drupal::entityQuery('webform_submission');
+  $query->condition('processed', $value);
+  $webform_submission = \Drupal::routeMatch()->getParameter('webform');
+  if ($webform_submission != NULL) {
+    $id = $webform_submission->id();
+    $query->condition('webform_id', $id);
+  }
+  $query->count();
+  $total = $query->execute();
+  return $total;
+}
+
+/**
+ * Submit callback.
+ *
+ * @param array $form
+ *   The form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   Form state.
+ */
+function tide_webform_form_webform_results_export_form_submit(array $form, FormStateInterface $form_state) {
+  $unprocessed_submissions = $form_state->getValue('unprocessed_submissions');
+  $process_submissions = $form_state->getValue('process_submissions');
+  $route = $form_state->getRedirect();
+  $route_parameters = $route->getRouteParameters();
+  $options = $route->getOptions();
+  $query = $options['query'];
+  $query['unprocessed_submissions'] = $unprocessed_submissions;
+  $query['process_submissions'] = $process_submissions;
+  $options = ['query' => $query];
+  $form_state->setRedirect('entity.webform.results_export', $route_parameters, $options);
 }
