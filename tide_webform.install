@@ -303,16 +303,7 @@ function tide_webform_update_8012() {
     'webform_submission_make_unprocess_action',
   ];
   $config = $config_factory->getEditable('webform.settings');
-  $op_status = $config->get('webform_submission_bulk_form');
-  $op_actions = $config->get('webform_submission_bulk_form_actions');
-  if (!isset($op_status) || $op_status == FALSE) {
-    $config->set('webform_submission_bulk_form', TRUE);
-  }
-  foreach ($form_actions as $form_action) {
-    if (!in_array($form_action, $op_actions)) {
-      $op_actions[] = $form_action;
-    }
-  }
-  $config->set('webform_submission_bulk_form_actions', $op_actions);
+  $config->set('settings.webform_submission_bulk_form', TRUE);
+  $config->set('settings.webform_submission_bulk_form_actions', $form_actions);
   $config->save();
 }
