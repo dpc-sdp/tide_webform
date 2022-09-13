@@ -196,8 +196,8 @@ function tide_webform_entity_base_field_info(EntityTypeInterface $entity_type) {
   $fields = [];
   if ($entity_type->id() == 'webform_submission') {
     $fields['processed'] = BaseFieldDefinition::create('boolean')
-      ->setName('Processed')
-      ->setLabel(t('Processed'))
+      ->setName('Exported')
+      ->setLabel(t('Exported'))
       ->setDescription(t('A flag that indicates whether the submission has been downloaded'))
       ->setDefaultValue(FALSE)
       ->setDisplayConfigurable('form', FALSE);
