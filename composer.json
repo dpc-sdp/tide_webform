@@ -4,7 +4,7 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
-        "dpc-sdp/tide_core": "^3.0.0",
+        "dpc-sdp/tide_core": "^3.1.11",
         "drupal/token_conditions": "dev-compatible-with-drupal-9",
         "drupal/webform": "^6.1@beta",
         "choices/choices": "9.0.1",
@@ -12,6 +12,9 @@
         "jquery/inputmask": "5.0.5",
         "jquery/intl-tel-input": "16.1.0",
         "progress-tracker/progress-tracker": "1.4.0"
+    },
+    "provide": {
+        "drupal/ckeditor": "*"
     },
     "extra": {
         "patches": {
