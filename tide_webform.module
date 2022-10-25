@@ -43,8 +43,8 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
 
   if ($form_id == 'webform_submission_filter_form') {
     $options = $form['filter']['state']['#options'];
-    $options['processed'] = 'Processed [' . tide_webform_submission_filter_query(1) . ']';
-    $options['unprocessed'] = 'Unprocessed [' . tide_webform_submission_filter_query(0) . ']';
+    $options['processed'] = 'Exported [' . tide_webform_submission_filter_query(1) . ']';
+    $options['unprocessed'] = 'New [' . tide_webform_submission_filter_query(0) . ']';
     $form['filter']['state']['#options'] = $options;
   }
 
@@ -52,8 +52,8 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
     $webform_submission = \Drupal::routeMatch()->getParameter('webform_submission');
     $form['processed'] = [
       '#type' => 'checkbox',
-      '#title' => t('Is this submission downloaded'),
-      '#description' => t('If checked, this submission will be flagged as downloaded'),
+      '#title' => t('Has this submission been exported?'),
+      '#description' => t('If checked, this submission will be flagged as exported. If unchecked, it will be flagged as a new submission.'),
       '#default_value' => tide_webform_get_processed($webform_submission),
       '#return_value' => TRUE,
     ];
@@ -62,12 +62,12 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
   if ($form_id == 'webform_results_export') {
     $form['export']['download']['unprocessed_submissions'] = [
       '#type' => 'checkbox',
-      '#title' => t('Only download unprocessed submissions'),
+      '#title' => t('Only download new submissions'),
       '#default_value' => TRUE,
     ];
     $form['export']['download']['process_submissions'] = [
       '#type' => 'checkbox',
-      '#title' => t('Download submissions are marked as processed'),
+      '#title' => t('Download submissions marked as exported'),
       '#default_value' => TRUE,
     ];
 
@@ -196,8 +196,8 @@ function tide_webform_entity_base_field_info(EntityTypeInterface $entity_type) {
   $fields = [];
   if ($entity_type->id() == 'webform_submission') {
     $fields['processed'] = BaseFieldDefinition::create('boolean')
-      ->setName('Processed')
-      ->setLabel(t('Processed'))
+      ->setName('Exported')
+      ->setLabel(t('Exported'))
       ->setDescription(t('A flag that indicates whether the submission has been downloaded'))
       ->setDefaultValue(FALSE)
       ->setDisplayConfigurable('form', FALSE);
