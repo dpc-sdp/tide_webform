@@ -22,7 +22,7 @@ function tide_webform_install() {
  */
 function tide_webform_update_8001() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_webform') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_webform') . '/config/install'];
   _tide_import_single_config('tide_webform.defaults', $config_location);
 }
 
@@ -275,7 +275,7 @@ function tide_webform_update_8011() {
     'system.action.webform_submission_make_unprocess_action' => 'action',
   ];
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_webform') . '/config/optional'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_webform') . '/config/optional'];
 
   foreach ($configs as $config => $type) {
     $config_read = _tide_read_config($config, $config_location, TRUE);
