@@ -10,7 +10,7 @@ use Drupal\Core\Session\AccountInterface;
  *
  * @Action(
  *   id = "webform_submission_make_process_action",
- *   label = @Translation("Mark as exported"),
+ *   label = @Translation("Process submission"),
  *   type = "webform_submission"
  * )
  */

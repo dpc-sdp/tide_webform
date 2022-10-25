@@ -98,13 +98,13 @@ class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
 
     switch ($value) {
       case '0':
-        return 'New';
+        return 'Unprocessed';
 
       case '1':
-        return 'Exported';
+        return 'Processed';
 
       default:
-        return 'New';
+        return 'Unprocessed';
 
     }
   }
