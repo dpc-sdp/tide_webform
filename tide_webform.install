@@ -22,7 +22,7 @@ function tide_webform_install() {
  */
 function tide_webform_update_8001() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_webform') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_webform') . '/config/install'];
   _tide_import_single_config('tide_webform.defaults', $config_location);
 }
 
@@ -275,7 +275,7 @@ function tide_webform_update_8011() {
     'system.action.webform_submission_make_unprocess_action' => 'action',
   ];
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_webform') . '/config/optional'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_webform') . '/config/optional'];
 
   foreach ($configs as $config => $type) {
     $config_read = _tide_read_config($config, $config_location, TRUE);
@@ -303,7 +303,25 @@ function tide_webform_update_8012() {
     'webform_submission_make_unprocess_action',
   ];
   $config = $config_factory->getEditable('webform.settings');
-  $config->set('webform_submission_bulk_form', TRUE);
-  $config->set('webform_submission_bulk_form_actions', $form_actions);
+  $config->set('settings.webform_submission_bulk_form', TRUE);
+  $config->set('settings.webform_submission_bulk_form_actions', $form_actions);
   $config->save();
+}
+
+/**
+ * Updating webform submission processed unprocessed labels.
+ */
+function tide_webform_update_8013() {
+  $config = \Drupal::configFactory()
+    ->getEditable('system.action.webform_submission_make_process_action');
+  if ($config) {
+    $config->set('label', 'Mark as exported');
+    $config->save();
+  }
+  $config = \Drupal::configFactory()
+    ->getEditable('system.action.webform_submission_make_unprocess_action');
+  if ($config) {
+    $config->set('label', 'Mark as new');
+    $config->save();
+  }
 }

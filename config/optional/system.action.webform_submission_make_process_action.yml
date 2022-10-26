@@ -4,7 +4,7 @@ dependencies:
   module:
     - tide_webform
 id: webform_submission_make_process_action
-label: 'Process submission'
+label: 'Mark as exported'
 type: webform_submission
 plugin: webform_submission_make_process_action
 configuration: {  }
