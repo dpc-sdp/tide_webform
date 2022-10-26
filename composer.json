@@ -13,9 +13,6 @@
         "jquery/intl-tel-input": "16.1.0",
         "progress-tracker/progress-tracker": "1.4.0"
     },
-    "provide": {
-        "drupal/ckeditor": "*"
-    },
     "extra": {
         "patches": {
         }
