@@ -10,7 +10,7 @@ use Drupal\Core\Session\AccountInterface;
  *
  * @Action(
  *   id = "webform_submission_make_unprocess_action",
- *   label = @Translation("Unprocess submission"),
+ *   label = @Translation("Mark as new"),
  *   type = "webform_submission"
  * )
  */
