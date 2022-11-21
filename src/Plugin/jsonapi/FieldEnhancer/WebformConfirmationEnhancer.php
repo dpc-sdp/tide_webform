@@ -10,7 +10,7 @@ use Shaper\Util\Context;
  * Exposes confirmation message from notes field.
  *
  * This plugin only works on `notes` field, and the confirmation message field
- * should be `value` type with `confirmation_message` machine name.
+ * should be `hidden` type with `confirmation_message` machine name.
  *
  * @ResourceFieldEnhancer(
  *   id = "webform_confirmation_enhancer",
