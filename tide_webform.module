@@ -271,6 +271,13 @@ function tide_webform_form_webform_add_form_alter(&$form, FormStateInterface $fo
  * Implements hook_ENTITY_TYPE_presave().
  */
 function tide_webform_webform_submission_presave(WebformSubmission $webform_submission) {
+  // Preparing confirmation message.
+  $webform = $webform_submission->getWebform();
+  $token = $webform->getElementDecoded('confirmation_message')['#default_value'];
+  if (!empty($token)) {
+    $webform_submission->set('notes', $webform_submission->uuid());
+    $webform_submission->setElementData('confirmation_message', $token);
+  }
   $elements = $webform_submission->getWebform()->getElementsDecoded();
   // SDPAP-5181 Front end submits the value as numeric.
   // Triggers invalid validation error from core.
