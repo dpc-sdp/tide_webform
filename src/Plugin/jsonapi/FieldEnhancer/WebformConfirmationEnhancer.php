@@ -5,6 +5,7 @@ namespace Drupal\tide_webform\Plugin\jsonapi\FieldEnhancer;
 use Drupal\Component\Uuid\Uuid;
 use Drupal\jsonapi_extras\Plugin\ResourceFieldEnhancerBase;
 use Shaper\Util\Context;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Exposes confirmation message from notes field.
@@ -30,7 +31,17 @@ class WebformConfirmationEnhancer extends ResourceFieldEnhancerBase {
         ->loadByProperties(['uuid' => $data]);
       if (!empty($webform_submission_by_uuid)) {
         $webform_submission_by_uuid = reset($webform_submission_by_uuid);
-        return $webform_submission_by_uuid->getElementData('confirmation_message');
+        $message = $webform_submission_by_uuid->getElementData('confirmation_message');
+        // We only check if the [webform:handler token exists or not, as it may
+        // involve communicating outside if it is still in here, meaning the
+        // communication gets failed.
+        $is_unprocessed_token = (strpos(print_r($message, TRUE), '[webform:handler:') !== FALSE) ? TRUE : FALSE;
+        if ($is_unprocessed_token) {
+          // Removes the failed webform_submission.
+          $webform_submission_by_uuid->delete();
+          throw new NotFoundHttpException();
+        }
+        return $message;
       }
     }
     // We don't want to expose notes to outside.
