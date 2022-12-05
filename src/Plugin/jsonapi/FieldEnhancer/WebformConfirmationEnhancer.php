@@ -5,7 +5,6 @@ namespace Drupal\tide_webform\Plugin\jsonapi\FieldEnhancer;
 use Drupal\Component\Uuid\Uuid;
 use Drupal\jsonapi_extras\Plugin\ResourceFieldEnhancerBase;
 use Shaper\Util\Context;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Exposes confirmation message from notes field.
@@ -32,14 +31,9 @@ class WebformConfirmationEnhancer extends ResourceFieldEnhancerBase {
       if (!empty($webform_submission_by_uuid)) {
         $webform_submission_by_uuid = reset($webform_submission_by_uuid);
         $message = $webform_submission_by_uuid->getElementData('confirmation_message');
-        // We only check if the [webform:handler token exists or not, as it may
-        // involve communicating outside if it is still in here, meaning the
-        // communication gets failed.
-        $is_unprocessed_token = (strpos(print_r($message, TRUE), '[webform:handler:') !== FALSE) ? TRUE : FALSE;
-        if ($is_unprocessed_token) {
-          // Removes the failed webform_submission.
+        $configuration = $this->getConfiguration();
+        if ($configuration['remove_submission']) {
           $webform_submission_by_uuid->delete();
-          throw new NotFoundHttpException();
         }
         return $message;
       }
@@ -68,6 +62,32 @@ class WebformConfirmationEnhancer extends ResourceFieldEnhancerBase {
         ['type' => 'object'],
         ['type' => 'string'],
       ],
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSettingsForm(array $resource_field_info) {
+    $settings = empty($resource_field_info['enhancer']['settings'])
+      ? $this->getConfiguration()
+      : $resource_field_info['enhancer']['settings'];
+    return [
+      'remove_submission' => [
+        '#type' => 'checkbox',
+        '#title' => $this->t('Disable saving of submissions ?'),
+        '#description' => $this->t("If checked, instead of saving a submission, it delete it."),
+        '#default_value' => $settings['remove_submission'],
+      ],
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    return [
+      'remove_submission' => FALSE,
     ];
   }
 
