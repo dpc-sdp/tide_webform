@@ -30,7 +30,12 @@ class WebformConfirmationEnhancer extends ResourceFieldEnhancerBase {
         ->loadByProperties(['uuid' => $data]);
       if (!empty($webform_submission_by_uuid)) {
         $webform_submission_by_uuid = reset($webform_submission_by_uuid);
-        return $webform_submission_by_uuid->getElementData('confirmation_message');
+        $message = $webform_submission_by_uuid->getElementData('confirmation_message');
+        $configuration = $this->getConfiguration();
+        if ($configuration['remove_submission']) {
+          $webform_submission_by_uuid->delete();
+        }
+        return $message;
       }
     }
     // We don't want to expose notes to outside.
@@ -57,6 +62,32 @@ class WebformConfirmationEnhancer extends ResourceFieldEnhancerBase {
         ['type' => 'object'],
         ['type' => 'string'],
       ],
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSettingsForm(array $resource_field_info) {
+    $settings = empty($resource_field_info['enhancer']['settings'])
+      ? $this->getConfiguration()
+      : $resource_field_info['enhancer']['settings'];
+    return [
+      'remove_submission' => [
+        '#type' => 'checkbox',
+        '#title' => $this->t('Disable saving of submissions ?'),
+        '#description' => $this->t("If checked, instead of saving a submission, it delete it."),
+        '#default_value' => $settings['remove_submission'],
+      ],
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    return [
+      'remove_submission' => FALSE,
     ];
   }
 
