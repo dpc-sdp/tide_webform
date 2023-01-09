@@ -1,129 +1,128 @@
 {
-    "name": "dpc-sdp/tide_webform",
-    "description": "Webform configuration for Tide Drupal 8 distribution",
-    "type": "drupal-module",
-    "license": "GPL-2.0-or-later",
-    "require": {
-        "dpc-sdp/tide_core": "dev-reference",
-        "drupal/token_conditions": "dev-compatible-with-drupal-9",
-        "drupal/webform": "^6.1@beta",
-        "choices/choices": "9.0.1",
-        "codemirror/codemirror": "5.53.2",
-        "jquery/inputmask": "5.0.5",
-        "jquery/intl-tel-input": "16.1.0",
-        "progress-tracker/progress-tracker": "1.4.0"
+  "description": "Webform configuration for Tide Drupal 8 distribution",
+  "extra": {
+    "patches": {}
+  },
+  "license": "GPL-2.0-or-later",
+  "name": "dpc-sdp/tide_webform",
+  "repositories": {
+    "choices": {
+      "_webform": true,
+      "package": {
+        "dist": {
+          "type": "zip",
+          "url": "https://github.com/jshjohnson/Choices/archive/v9.0.1.zip"
+        },
+        "extra": {
+          "installer-name": "choices"
+        },
+        "name": "choices/choices",
+        "require": {
+          "composer/installers": "~1.0"
+        },
+        "type": "drupal-library",
+        "version": "9.0.1"
+      },
+      "type": "package"
     },
-    "extra": {
-        "patches": {
-        }
+    "codemirror": {
+      "_webform": true,
+      "package": {
+        "dist": {
+          "type": "zip",
+          "url": "https://github.com/components/codemirror/archive/5.53.2.zip"
+        },
+        "extra": {
+          "installer-name": "codemirror"
+        },
+        "name": "codemirror/codemirror",
+        "require": {
+          "composer/installers": "~1.0"
+        },
+        "type": "drupal-library",
+        "version": "5.53.2"
+      },
+      "type": "package"
     },
-    "suggest": {
-        "dpc-sdp/tide_api:^3.0.0": "Allows to use Drupal in headless mode"
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
     },
-    "repositories": {
-        "drupal": {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
+    "drupal/token_conditions": {
+      "no-api": true,
+      "type": "vcs",
+      "url": "https://github.com/dpc-sdp/token_conditions"
+    },
+    "jquery.inputmask": {
+      "_webform": true,
+      "package": {
+        "dist": {
+          "type": "zip",
+          "url": "https://github.com/RobinHerbots/jquery.inputmask/archive/5.0.5.zip"
         },
-        "choices": {
-            "_webform": true,
-            "type": "package",
-            "package": {
-                "name": "choices/choices",
-                "version": "9.0.1",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "choices"
-                },
-                "dist": {
-                    "url": "https://github.com/jshjohnson/Choices/archive/v9.0.1.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
-                }
-            }
+        "extra": {
+          "installer-name": "jquery.inputmask"
         },
-        "codemirror": {
-            "_webform": true,
-            "type": "package",
-            "package": {
-                "name": "codemirror/codemirror",
-                "version": "5.53.2",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "codemirror"
-                },
-                "dist": {
-                    "url": "https://github.com/components/codemirror/archive/5.53.2.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
-                }
-            }
+        "name": "jquery/inputmask",
+        "require": {
+          "composer/installers": "~1.0"
         },
-        "jquery.inputmask": {
-            "_webform": true,
-            "type": "package",
-            "package": {
-                "name": "jquery/inputmask",
-                "version": "5.0.5",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "jquery.inputmask"
-                },
-                "dist": {
-                    "url": "https://github.com/RobinHerbots/jquery.inputmask/archive/5.0.5.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
-                }
-            }
+        "type": "drupal-library",
+        "version": "5.0.5"
+      },
+      "type": "package"
+    },
+    "jquery.intl-tel-input": {
+      "_webform": true,
+      "package": {
+        "dist": {
+          "type": "zip",
+          "url": "https://github.com/jackocnr/intl-tel-input/archive/v16.1.0.zip"
         },
-        "jquery.intl-tel-input": {
-            "_webform": true,
-            "type": "package",
-            "package": {
-                "name": "jquery/intl-tel-input",
-                "version": "16.1.0",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "jquery.intl-tel-input"
-                },
-                "dist": {
-                    "url": "https://github.com/jackocnr/intl-tel-input/archive/v16.1.0.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
-                }
-            }
+        "extra": {
+          "installer-name": "jquery.intl-tel-input"
         },
-        "progress-tracker": {
-            "_webform": true,
-            "type": "package",
-            "package": {
-                "name": "progress-tracker/progress-tracker",
-                "version": "1.4.0",
-                "type": "drupal-library",
-                "extra": {
-                    "installer-name": "progress-tracker"
-                },
-                "dist": {
-                    "url": "https://github.com/NigelOToole/progress-tracker/archive/v1.4.0.zip",
-                    "type": "zip"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
-                }
-            }
+        "name": "jquery/intl-tel-input",
+        "require": {
+          "composer/installers": "~1.0"
         },
-        "drupal/token_conditions": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/token_conditions"
-        }
+        "type": "drupal-library",
+        "version": "16.1.0"
+      },
+      "type": "package"
+    },
+    "progress-tracker": {
+      "_webform": true,
+      "package": {
+        "dist": {
+          "type": "zip",
+          "url": "https://github.com/NigelOToole/progress-tracker/archive/v1.4.0.zip"
+        },
+        "extra": {
+          "installer-name": "progress-tracker"
+        },
+        "name": "progress-tracker/progress-tracker",
+        "require": {
+          "composer/installers": "~1.0"
+        },
+        "type": "drupal-library",
+        "version": "1.4.0"
+      },
+      "type": "package"
     }
+  },
+  "require": {
+    "choices/choices": "9.0.1",
+    "codemirror/codemirror": "5.53.2",
+    "dpc-sdp/tide_core": "dev-reference",
+    "drupal/token_conditions": "dev-compatible-with-drupal-9",
+    "drupal/webform": "^6.1@beta",
+    "jquery/inputmask": "5.0.5",
+    "jquery/intl-tel-input": "16.1.0",
+    "progress-tracker/progress-tracker": "1.4.0"
+  },
+  "suggest": {
+    "dpc-sdp/tide_api:^3.0.0": "Allows to use Drupal in headless mode"
+  },
+  "type": "drupal-module"
 }

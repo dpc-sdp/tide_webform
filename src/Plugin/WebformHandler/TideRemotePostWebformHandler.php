@@ -7,6 +7,7 @@ use Drupal\Core\Url;
 use Drupal\webform\WebformSubmissionInterface;
 use Drupal\webform\Plugin\WebformHandler\RemotePostWebformHandler;
 use GuzzleHttp\Exception\RequestException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Tide Webform submission remote post handler.
@@ -107,6 +108,33 @@ class TideRemotePostWebformHandler extends RemotePostWebformHandler {
         $webform_submission->resave();
       }
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getResponseData(ResponseInterface $response) {
+    // Prepare data to feed confirmation_message field.
+    $custom_response_message = $this->getCustomResponseMessage($response);
+    if (!$custom_response_message) {
+      return parent::getResponseData($response);
+    }
+    // Decodes response body.
+    $body = (string) $response->getBody();
+    $data = json_decode($body, TRUE);
+    $data = (json_last_error() === JSON_ERROR_NONE) ? $data : $body;
+    // Builds up the token data.
+    $token_data = [
+      'webform_handler' => [
+        $this->getHandlerId() => $data,
+      ],
+    ];
+    // Decodes the custom response message.
+    $data = $this->replaceTokens($custom_response_message, $this->getWebform(), $token_data);
+    // Sets error_message.
+    $this->webformSubmission->setElementData('confirmation_message', $response->getStatusCode() . '|' . $data);
+    $this->webformSubmission->resave();
+    return parent::getResponseData($response);
   }
 
 }
