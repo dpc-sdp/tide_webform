@@ -119,7 +119,9 @@
     "drupal/webform": "^6.1@beta",
     "jquery/inputmask": "5.0.5",
     "jquery/intl-tel-input": "16.1.0",
-    "progress-tracker/progress-tracker": "1.4.0"
+    "progress-tracker/progress-tracker": "1.4.0",
+    "respect/validation": "dev-master",
+    "giggsey/libphonenumber-for-php": "^8.13"
   },
   "suggest": {
     "dpc-sdp/tide_api:^3.0.0": "Allows to use Drupal in headless mode"
