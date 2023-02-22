@@ -15,6 +15,8 @@
     },
     "extra": {
         "patches": {
+            "drupal/webform": {
+        "Filtering by category doesn't work - https://www.drupal.org/project/webform/issues/3313766": "https://www.drupal.org/files/issues/2022-10-07/3313766-8.patch"
         }
     },
     "suggest": {
