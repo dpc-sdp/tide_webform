@@ -2,6 +2,7 @@
 
 namespace Drupal\tide_webform\EventSubscriber;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\jsonapi\CacheableResourceResponse;
 use Drupal\jsonapi\JsonApiResource\ErrorCollection;
 use Drupal\jsonapi\JsonApiResource\JsonApiDocumentTopLevel;
@@ -46,7 +47,7 @@ class TideWebformExceptionSubscriber extends DefaultExceptionSubscriber {
       return;
     }
     if (($exception = $event->getThrowable()) && !$exception instanceof HttpException) {
-      $exception = new HttpException(400, $exception->getMessage(), $exception);
+      $exception = new HttpException(422, $exception->getMessage(), $exception);
       $event->setThrowable($exception);
     }
 
@@ -59,7 +60,13 @@ class TideWebformExceptionSubscriber extends DefaultExceptionSubscriber {
   protected function setEventResponse(ExceptionEvent $event, $status) {
     /** @var \Symfony\Component\HttpKernel\Exception\HttpException $exception */
     $exception = $event->getThrowable();
-    $document = new JsonApiDocumentTopLevel(new ErrorCollection([$exception]), new NullIncludedData(), new LinkCollection([]));
+    $messages = $exception->getMessage();
+    $decoded = Json::decode($messages);
+    $ErrorCollection = [];
+    foreach ($decoded as $item){
+      $ErrorCollection[] = new HttpException(422,strip_tags($item));
+    }
+    $document = new JsonApiDocumentTopLevel(new ErrorCollection($ErrorCollection), new NullIncludedData(), new LinkCollection([]));
     if ($event->getRequest()->isMethodCacheable()) {
       $response = new CacheableResourceResponse($document, $exception->getStatusCode(), $exception->getHeaders());
       $response->addCacheableDependency($exception);

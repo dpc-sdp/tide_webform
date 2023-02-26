@@ -14,6 +14,7 @@ use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformSubmissionForm;
 use Respect\Validation\Validator as v;
+use Drupal\Component\Serialization\Json;
 
 /**
  * Implements hook_config_ignore_settings_alter().
@@ -289,7 +290,7 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
       $service = _validate_service($element['#type']);
       $value = $submission_data[$key];
       if (!$service->validate($value)){
-        $results[] = $key . ' field has an unacceptable value.';
+        $results[] = $element['#title'] . ' field contains an invalid value.';
       }
     }
     if ($element['#type'] == 'number') {
@@ -306,13 +307,8 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
   foreach ($errors as $error){
     $results[] = $error->render();
   }
-  $prepared_render = [
-    '#items' => $results,
-    '#theme' => 'item_list'
-  ];
   if (!empty($results)){
-    $render_string = \Drupal::service('renderer')->render($prepared_render);
-    throw new Exception($render_string);
+    throw new Exception(Json::encode($results));
   }
 }
 
