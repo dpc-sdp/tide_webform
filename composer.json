@@ -1,7 +1,11 @@
 {
   "description": "Webform configuration for Tide Drupal 8 distribution",
   "extra": {
-    "patches": {}
+    "patches": {
+      "drupal/webform": {
+        "Filtering by category doesn't work - https://www.drupal.org/project/webform/issues/3313766": "https://www.drupal.org/files/issues/2022-10-07/3313766-8.patch"
+      }
+    }
   },
   "license": "GPL-2.0-or-later",
   "name": "dpc-sdp/tide_webform",
