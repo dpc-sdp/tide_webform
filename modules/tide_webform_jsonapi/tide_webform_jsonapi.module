@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * JSON:API Tide_webform.
+ */
+
+/**
+ * Callback for required validate.
+ */
+function tide_webform_jsonapi_required_validate($value, $arr) {
+  if (empty($value)) {
+    if (count($arr) > 1) {
+      return $arr[1];
+    }
+    return 'The field is mandatory.';
+  }
+  return TRUE;
+}
+
+/**
+ * Callback for required validate.
+ */
+function tide_webform_jsonapi_pattern_validate($value, $arr) {
+  if (preg_match($arr[0], $value) != 1) {
+    if (count($arr) > 1) {
+      return $arr[1];
+    }
+    return 'The value does not match the criteria.';
+  }
+  return TRUE;
+}
