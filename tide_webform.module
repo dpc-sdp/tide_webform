@@ -289,14 +289,6 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
       }
     }
   }
-  $errors = WebformSubmissionForm::validateWebformSubmission($webform_submission);
-  if ($errors) {
-    foreach ($elements as $key => $element) {
-      if (isset($errors[$key]) && !empty($errors[$key])) {
-        throw new Exception($errors[$key]);
-      }
-    }
-  }
 }
 
 /**
