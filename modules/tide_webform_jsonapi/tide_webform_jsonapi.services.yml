@@ -1,0 +1,3 @@
+services:
+  tide_webform_jsonapi.helper:
+    class: Drupal\tide_webform_jsonapi\TideWebformJsonapiHelper
