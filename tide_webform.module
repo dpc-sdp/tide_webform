@@ -365,3 +365,21 @@ function tide_webform_form_webform_results_export_form_submit(array $form, FormS
   $options = ['query' => $query];
   $form_state->setRedirect('entity.webform.results_export', $route_parameters, $options);
 }
+
+/**
+ * Implements hook_webform_third_party_settings_form_alter().
+ */
+function tide_webform_webform_third_party_settings_form_alter(array &$form, FormStateInterface $form_state) {
+  $webform = $form_state->getFormObject()->getEntity();
+  $third_party_settings = $webform->getThirdPartySettings('tide_webform');
+  $form['third_party_settings']['tide_webform'] = [
+    '#type' => 'details',
+    '#title' => t('Tide webform reCAPTCHA'),
+    '#open' => TRUE,
+  ];
+  $form['third_party_settings']['tide_webform']['tide_webform_recaptcha'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Enable reCAPTCHA'),
+    '#default_value' => empty($third_party_settings['tide_webform_recaptcha']) ? NULL : $third_party_settings['tide_webform_recaptcha'],
+  ];
+}
