@@ -379,7 +379,6 @@ function tide_webform_form_webform_results_export_form_submit(array $form, FormS
 function tide_webform_webform_element_default_properties_alter(array &$properties, array &$definition) {
   if (($definition["id"] === "textfield") && (empty($properties["counter_type"]))) {
     $properties["counter_type"] = "character";
-    $properties["counter_minimum"] = 0;
     $properties["counter_maximum"] = 255;
   }
 }
