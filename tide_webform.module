@@ -371,11 +371,10 @@ function tide_webform_form_webform_results_export_form_submit(array $form, FormS
 /**
  * Custom validation callback for managed file type element.
  *
- * @param array $form
+ * @param array $element
  *   The form.
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   Form state.
- *
  */
 function tide_webform_managed_file_type_element_validation(array $element, FormStateInterface $form_state) {
   $allowed_file_formats = ['docx', 'jpg', 'png', 'pdf', 'csv', 'zip', 'xls'];
@@ -391,11 +390,11 @@ function tide_webform_managed_file_type_element_validation(array $element, FormS
   if (count($matched_values) > 0) {
     $unmatched_values = array_diff($given_file_formats, $matched_values);
     if (count($unmatched_values) > 0) {
-      $form_state->setError($element, t('Invalid file formats found:' . implode(", ", $unmatched_values)));
+      $form_state->setError($element, t('Invalid file formats found: @format', ['@format' => implode(", ", $unmatched_values)]));
     }
   }
   $unmatched_values = array_diff($allowed_file_formats, $matched_values);
   if (count($matched_values) == 0 && count($unmatched_values) > 0) {
-    $form_state->setError($element, t('Invalid file formats found::' . implode(", ", $given_file_formats)));
+    $form_state->setError($element, t('Invalid file formats found: @format', ['@format' => implode(", ", $given_file_formats)]));
   }
 }

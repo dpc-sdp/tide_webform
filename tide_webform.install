@@ -341,7 +341,7 @@ function tide_webform_update_8014() {
     foreach ($webform_elements as $webform_element) {
       if (array_key_exists($webform_element, $excluded_elements_values)) {
         unset($excluded_elements_values[$webform_element]);
-      } 
+      }
     }
     $config->set('element.excluded_elements', $excluded_elements_values);
     $config->set('file.default_max_filesize', '10 MB');
