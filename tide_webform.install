@@ -325,3 +325,27 @@ function tide_webform_update_8013() {
     $config->save();
   }
 }
+
+/**
+ * Updating webform settings for managed_file types.
+ */
+function tide_webform_update_8014() {
+  if (\Drupal::moduleHandler()->moduleExists('webform')) {
+    $webform_elements = [
+      'managed_file',
+      'webform_element',
+    ];
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('webform.settings');
+    $excluded_elements_values = $config->get('element.excluded_elements');
+    foreach ($webform_elements as $webform_element) {
+      if (array_key_exists($webform_element, $excluded_elements_values)) {
+        unset($excluded_elements_values[$webform_element]);
+      } 
+    }
+    $config->set('element.excluded_elements', $excluded_elements_values);
+    $config->set('file.default_max_filesize', '10 MB');
+    $config->set('default_managed_file_extensions', 'docx jpg png pdf csv zip xls');
+    $config->save();
+  }
+}
