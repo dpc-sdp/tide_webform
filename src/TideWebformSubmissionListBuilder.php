@@ -2,6 +2,7 @@
 
 namespace Drupal\tide_webform;
 
+use Drupal\Core\Database\Database;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\webform\WebformSubmissionListBuilder;
@@ -23,6 +24,11 @@ class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
    * Submission state unstarred.
    */
   const STATE_UNPROCESSED = 'unprocessed';
+
+  /**
+   * Submission state with_attachments.
+   */
+  const STATE_WITH_ATTACHMENTS = 'with_attachments';
 
   /**
    * {@inheritdoc}
@@ -48,6 +54,16 @@ class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
         $query->condition('processed', 0);
         break;
 
+      case static::STATE_WITH_ATTACHMENTS:
+        $sub_query = Database::getConnection()->select('webform_submission_data', 'sd')
+          ->fields('sd', ['sid'])
+          ->condition('name', 'file', '=')
+          ->condition('sd.value', '', '<>');
+        $query->condition(
+          $query->orConditionGroup()
+            ->condition('sid', $sub_query, 'IN')
+        );
+        break;
     }
     return $query;
   }
