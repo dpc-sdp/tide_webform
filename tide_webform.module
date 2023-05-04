@@ -408,9 +408,10 @@ function tide_webform_managed_file_type_element_validation(array $element, FormS
  */
 function tide_webform_submission_filter_query_file($data_key) {
   $database = \Drupal::service('database');
-  $select = $database->select('webform_submission_data', 'sd')
+  $select = $database->select('webform_submission_data', 'sd');
+  $select->join('file_usage', 'fu', 'fu.fid = sd.value');
+  $select
     ->fields('sd', ['sid'])
-    ->condition('sd.name', $data_key, '=')
     ->condition('sd.value', '', '<>');
   $select->groupBy('sid');
   $total = $select->countQuery()->execute()->fetchField();

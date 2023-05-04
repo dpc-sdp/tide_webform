@@ -55,10 +55,12 @@ class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
         break;
 
       case static::STATE_WITH_ATTACHMENTS:
-        $sub_query = Database::getConnection()->select('webform_submission_data', 'sd')
+        $sub_query = Database::getConnection()->select('webform_submission_data', 'sd');
+        $sub_query->join('file_usage', 'fu', 'fu.fid = sd.value');
+        $sub_query
           ->fields('sd', ['sid'])
-          ->condition('name', 'file', '=')
-          ->condition('sd.value', '', '<>');
+          ->condition('sd.value', '', '<>')
+          ->groupBy('sd.sid');
         $query->condition(
           $query->orConditionGroup()
             ->condition('sid', $sub_query, 'IN')
