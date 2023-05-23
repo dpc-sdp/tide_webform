@@ -13,6 +13,8 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformSubmissionForm;
+use Respect\Validation\Validator as v;
+use Drupal\Component\Serialization\Json;
 
 /**
  * Implements hook_config_ignore_settings_alter().
@@ -281,7 +283,16 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
   // Triggers invalid validation error from core.
   // See /Drupal/Core/Form/FormValidator.php $is_empty_value.
   $submission_data = $webform_submission->getData();
+  $results = [];
+  $targets = ['email','url','tel'];
   foreach ($elements as $key => $element) {
+    if (in_array($element['#type'], $targets)){
+      $service = _validate_service($element['#type']);
+      $value = $submission_data[$key];
+      if (!$service->validate($value)){
+        $results[] = $element['#title'] . ' field contains an invalid value.';
+      }
+    }
     if ($element['#type'] == 'number') {
       if (is_numeric($submission_data[$key])) {
         $submission_data[$key] = strval($submission_data[$key]);
@@ -289,13 +300,15 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
       }
     }
   }
+
   $errors = WebformSubmissionForm::validateWebformSubmission($webform_submission);
-  if ($errors) {
-    foreach ($elements as $key => $element) {
-      if (isset($errors[$key]) && !empty($errors[$key])) {
-        throw new Exception($errors[$key]);
-      }
-    }
+
+  /** @var \Drupal\Core\StringTranslation\TranslatableMarkup $error */
+  foreach ($errors as $error){
+    $results[] = $error->render();
+  }
+  if (!empty($results)){
+    throw new Exception(Json::encode($results));
   }
 }
 
@@ -364,4 +377,16 @@ function tide_webform_form_webform_results_export_form_submit(array $form, FormS
   $query['process_submissions'] = $process_submissions;
   $options = ['query' => $query];
   $form_state->setRedirect('entity.webform.results_export', $route_parameters, $options);
+}
+
+function _validate_service(string $service_name){
+  switch ($service_name){
+    case 'url':
+      return v::url();
+    case 'tel':
+      return v::phone('AU');
+    case 'email':
+      return  v::email();
+  }
+  return NULL;
 }
