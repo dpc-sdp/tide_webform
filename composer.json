@@ -21,7 +21,7 @@
         "Exporting webform submission as batch does not allowed for extended field due to static method - https://www.drupal.org/project/webform/issues/3348336#comment-14969352": "https://www.drupal.org/files/issues/2023-03-16/exporting-webform-submission-static-batch-process-3348336-3.patch"
       },
       "drupal/webform_rest": {
-        "Send/Upload files - https://www.drupal.org/project/webform_rest/issues/2899902": "https://www.drupal.org/files/issues/2023-05-10/webform_rest-add_file_upload_resource-2899902-56-v4.0.2.patch"
+        "Send/Upload files - https://www.drupal.org/project/webform_rest/issues/2899902": "https://www.drupal.org/files/issues/2023-05-10/webform_rest-add_file_upload_resource-2899902-56-v4.x.patch"
       }
     }
   },
