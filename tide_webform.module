@@ -47,6 +47,7 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
     $options = $form['filter']['state']['#options'];
     $options['processed'] = 'Exported [' . tide_webform_submission_filter_query(1) . ']';
     $options['unprocessed'] = 'New [' . tide_webform_submission_filter_query(0) . ']';
+    $options['with_attachments'] = 'With attachments [' . tide_webform_submission_data_filter() . ']';
     $form['filter']['state']['#options'] = $options;
   }
 
@@ -397,4 +398,22 @@ function tide_webform_managed_file_type_element_validation(array $element, FormS
   if (count($matched_values) == 0 && count($unmatched_values) > 0) {
     $form_state->setError($element, t('Invalid file formats found: @format', ['@format' => implode(", ", $given_file_formats)]));
   }
+}
+
+/**
+ * Function to build query for filter on webform submissions data pages.
+ *
+ * @return total
+ *   Returns total from the webform submission data count.
+ */
+function tide_webform_submission_data_filter() {
+  $database = \Drupal::service('database');
+  $select = $database->select('webform_submission_data', 'sd');
+  $select->join('file_usage', 'fu', 'fu.fid = sd.value');
+  $select
+    ->fields('sd', ['sid'])
+    ->condition('sd.value', '', '<>');
+  $select->groupBy('sid');
+  $total = $select->countQuery()->execute()->fetchField();
+  return $total;
 }
