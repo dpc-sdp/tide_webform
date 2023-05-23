@@ -9,6 +9,8 @@ dependencies:
   - token_conditions:token_conditions
   - webform:webform
   - webform:webform_ui
+  - webform_rest:webform_rest
+  - restui:restui
   - dpc-sdp:tide_core
 config_devel:
   install:

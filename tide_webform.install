@@ -335,7 +335,7 @@ function tide_webform_update_8014() {
   // Check if module is both installed and enabled.
   if (!$moduleExists) {
     // If not, install the queue_mail module.
-    \Drupal::service('module_installer')->install(['webform_rest']);
+    \Drupal::service('module_installer')->install(['webform_rest', 'restui']);
   }
   if (\Drupal::moduleHandler()->moduleExists('webform')) {
     $webform_elements = [

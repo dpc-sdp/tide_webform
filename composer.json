@@ -8,6 +8,7 @@
     "drupal/token_conditions": "dev-compatible-with-drupal-9",
     "drupal/webform": "^6.1@beta",
     "drupal/webform_rest": "^4.0",
+    "drupal/restui": "^1.21",
     "choices/choices": "9.0.1",
     "codemirror/codemirror": "5.53.2",
     "jquery/inputmask": "5.0.5",
