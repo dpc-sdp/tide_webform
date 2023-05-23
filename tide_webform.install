@@ -352,7 +352,7 @@ function tide_webform_update_8014() {
     }
     $config->set('element.excluded_elements', $excluded_elements_values);
     $config->set('file.default_max_filesize', '10 MB');
-    $config->set('file.file_public', true);
+    $config->set('file.file_public', TRUE);
     $config->set('file.default_managed_file_extensions', 'docx jpg png pdf csv zip xls mp3 mp4 wav avi');
     $config->save();
   }
