@@ -330,6 +330,13 @@ function tide_webform_update_8013() {
  * Updating webform settings for managed_file types.
  */
 function tide_webform_update_8014() {
+  /** @var \Drupal\Core\Extension\ModuleHandler $moduleHandler */
+  $moduleExists = \Drupal::service('module_handler')->moduleExists('webform_rest');
+  // Check if module is both installed and enabled.
+  if (!$moduleExists) {
+    // If not, install the queue_mail module.
+    \Drupal::service('module_installer')->install(['webform_rest']);
+  }
   if (\Drupal::moduleHandler()->moduleExists('webform')) {
     $webform_elements = [
       'managed_file',
@@ -346,7 +353,13 @@ function tide_webform_update_8014() {
     $config->set('element.excluded_elements', $excluded_elements_values);
     $config->set('file.default_max_filesize', '10 MB');
     $config->set('file.file_public', true);
-    $config->set('file.default_managed_file_extensions', 'docx jpg png pdf csv zip xls');
+    $config->set('file.default_managed_file_extensions', 'docx jpg png pdf csv zip xls mp3 mp4 wav avi');
     $config->save();
   }
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_storage = \Drupal::service('config.storage');
+  $rest_resource_webform_file_upload = 'rest.resource.webform_rest_file_upload';
+  $config_location = [drupal_get_path('module', 'tide_webform') . '/config/optional'];
+  $config_read = _tide_read_config($rest_resource_webform_file_upload, $config_location, TRUE);
+  $config_storage->write($rest_resource_webform_file_upload, $config_read);
 }

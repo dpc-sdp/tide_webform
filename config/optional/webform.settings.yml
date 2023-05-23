@@ -180,7 +180,7 @@ file:
   file_private_redirect: true
   file_private_redirect_message: 'Please login to access the uploaded file.'
   default_max_filesize: '10 MB'
-  default_managed_file_extensions: 'docx jpg png pdf csv zip xls'
+  default_managed_file_extensions: 'docx jpg png pdf csv zip xls mp3 mp4 wav avi'
   default_audio_file_extensions: 'mp3 ogg wav'
   default_document_file_extensions: 'txt rtf pdf doc docx odt ppt pptx odp xls xlsx ods'
   default_image_file_extensions: 'gif jpg png svg'
