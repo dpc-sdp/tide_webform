@@ -5,7 +5,3 @@ services:
     decorates: webform_submission.exporter
     decoration_priority: 4
     arguments: ['@tide_webform.exporter.inner', '@config.factory', '@file_system', '@entity_type.manager', '@stream_wrapper_manager', '@plugin.manager.archiver', '@plugin.manager.webform.element', '@plugin.manager.webform.exporter']
-  tide_webform.route_subscriber:
-    class: Drupal\tide_webform\Routing\JsonapiLimitingRouteSubscriber
-    tags:
-      - { name: event_subscriber }
