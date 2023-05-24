@@ -39,12 +39,15 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
 
   if ($form_id == 'webform_ui_element_form') {
     $form['#after_build'][] = 'tide_webform_webform_ui_element_form_after_build';
+    // Custom validation for the managed_file elemt type.
+    $form['#validate'][] = 'tide_webform_managed_file_type_element_validation';
   }
 
   if ($form_id == 'webform_submission_filter_form') {
     $options = $form['filter']['state']['#options'];
     $options['processed'] = 'Exported [' . tide_webform_submission_filter_query(1) . ']';
     $options['unprocessed'] = 'New [' . tide_webform_submission_filter_query(0) . ']';
+    $options['with_attachments'] = 'With attachments [' . tide_webform_submission_data_filter() . ']';
     $form['filter']['state']['#options'] = $options;
   }
 
@@ -364,4 +367,65 @@ function tide_webform_form_webform_results_export_form_submit(array $form, FormS
   $query['process_submissions'] = $process_submissions;
   $options = ['query' => $query];
   $form_state->setRedirect('entity.webform.results_export', $route_parameters, $options);
+}
+
+/**
+ * Custom validation callback for managed file type element.
+ *
+ * @param array $element
+ *   The form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   Form state.
+ */
+function tide_webform_managed_file_type_element_validation(array $element, FormStateInterface $form_state) {
+  $allowed_file_formats = [
+    'docx',
+    'jpg',
+    'png',
+    'pdf',
+    'csv',
+    'zip',
+    'xls',
+    'mp3',
+    'mp4',
+    'wav',
+    'avi',
+  ];
+  $element_settings = $form_state->getValues();
+  if ($element_settings["properties"]["type"] !== "managed_file") {
+    return;
+  }
+  $given_file_formats = explode(" ", $element_settings["properties"]["file_extensions"]);
+  if ($element_settings["properties"]["multiple"] > 3 || $element_settings["properties"]["multiple"] === TRUE) {
+    $form_state->setError($element, t('Maximum allowed number of values are 3.'));
+  }
+  $matched_values = array_intersect($allowed_file_formats, $given_file_formats);
+  if (count($matched_values) > 0) {
+    $unmatched_values = array_diff($given_file_formats, $matched_values);
+    if (count($unmatched_values) > 0) {
+      $form_state->setError($element, t('Invalid file formats found: @format', ['@format' => implode(", ", $unmatched_values)]));
+    }
+  }
+  $unmatched_values = array_diff($allowed_file_formats, $matched_values);
+  if (count($matched_values) == 0 && count($unmatched_values) > 0) {
+    $form_state->setError($element, t('Invalid file formats found: @format', ['@format' => implode(", ", $given_file_formats)]));
+  }
+}
+
+/**
+ * Function to build query for filter on webform submissions data pages.
+ *
+ * @return total
+ *   Returns total from the webform submission data count.
+ */
+function tide_webform_submission_data_filter() {
+  $database = \Drupal::service('database');
+  $select = $database->select('webform_submission_data', 'sd');
+  $select->join('file_usage', 'fu', 'fu.fid = sd.value');
+  $select
+    ->fields('sd', ['sid'])
+    ->condition('sd.value', '', '<>');
+  $select->groupBy('sid');
+  $total = $select->countQuery()->execute()->fetchField();
+  return $total;
 }
