@@ -365,3 +365,20 @@ function tide_webform_form_webform_results_export_form_submit(array $form, FormS
   $options = ['query' => $query];
   $form_state->setRedirect('entity.webform.results_export', $route_parameters, $options);
 }
+
+/**
+ * Alter a webform element's default properties.
+ *
+ * @param array &$properties
+ *   An associative array containing an element's default properties.
+ * @param array $definition
+ *   The webform element's definition.
+ *
+ * @see webform_example_element_properties.module
+ */
+function tide_webform_webform_element_default_properties_alter(array &$properties, array &$definition) {
+  if (($definition["id"] === "textfield") && (empty($properties["counter_type"]))) {
+    $properties["counter_type"] = "character";
+    $properties["counter_maximum"] = 255;
+  }
+}
