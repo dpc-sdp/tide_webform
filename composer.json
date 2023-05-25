@@ -121,7 +121,7 @@
     "codemirror/codemirror": "5.53.2",
     "dpc-sdp/tide_core": "dev-reference",
     "drupal/token_conditions": "dev-compatible-with-drupal-9",
-    "drupal/webform": "^6.1@beta",
+    "drupal/webform": "^6.2@beta",
     "jquery/inputmask": "5.0.5",
     "jquery/intl-tel-input": "16.1.0",
     "progress-tracker/progress-tracker": "1.4.0"
