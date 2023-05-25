@@ -396,7 +396,7 @@ function tide_webform_managed_file_type_element_validation(array $element, FormS
     return;
   }
   $given_file_formats = explode(" ", $element_settings["properties"]["file_extensions"]);
-  if ($element_settings["properties"]["multiple"] > 3 || $element_settings["properties"]["multiple"] === TRUE) {
+  if ($element_settings["properties"]["multiple"] > 10 || $element_settings["properties"]["multiple"] === TRUE) {
     $form_state->setError($element, t('Maximum allowed number of values are 3.'));
   }
   $matched_values = array_intersect($allowed_file_formats, $given_file_formats);
