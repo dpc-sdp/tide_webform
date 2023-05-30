@@ -327,9 +327,29 @@ function tide_webform_update_8013() {
 }
 
 /**
- * Updating block.block.tide_webform_content_rating with Claro.
+ * Enables checkboxes and webform_element.
  */
 function tide_webform_update_8014() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('webform.settings');
+  // Gets all of excluded_elements.
+  $excluded_elements_value = $config->get('element.excluded_elements');
+  if ($config->get('element.excluded_elements.checkboxes')) {
+    // Includes 'checkboxes'.
+    unset($excluded_elements_value['checkboxes']);
+  }
+  if ($config->get('element.excluded_elements.webform_element')) {
+    // Includes 'webform_element'.
+    unset($excluded_elements_value['webform_element']);
+  }
+  $config->set('element.excluded_elements', $excluded_elements_value);
+  $config->save();
+}
+
+/**
+ * Updating block.block.tide_webform_content_rating with Claro.
+ */
+function tide_webform_update_8015() {
   \Drupal::moduleHandler()->loadInclude('tide_core', 'inc', 'includes/helpers');
   $config_location = [\Drupal::service('extension.list.module')->getPath('tide_webform') . '/config/optional'];
   $storage = \Drupal::entityTypeManager()->getStorage('block');
