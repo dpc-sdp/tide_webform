@@ -113,7 +113,6 @@ element:
   excluded_elements:
     password: password
     password_confirm: password_confirm
-    checkboxes: checkboxes
     color: color
     container: container
     datelist: datelist
@@ -140,7 +139,6 @@ element:
     webform_contact: webform_contact
     webform_custom_composite: webform_custom_composite
     webform_document_file: webform_document_file
-    webform_element: webform_element
     webform_email_confirm: webform_email_confirm
     webform_email_multiple: webform_email_multiple
     webform_entity_checkboxes: webform_entity_checkboxes
