@@ -6,9 +6,9 @@ dependencies:
     - token_conditions
     - webform
   theme:
-    - seven
+    - claro
 id: tide_webform_content_rating
-theme: seven
+theme: claro
 region: content
 weight: 10
 provider: null
