@@ -116,7 +116,7 @@ final class AddWebform extends EntityQueryResourceBase implements ContainerInjec
     foreach ($results as $key => $r) {
       $new_array[$key] = $this->tideWebformJsonapiHelper->attachValidateSettingsToPayload($r);
     }
-    $errors = $this->tideWebformJsonapiHelper->validatePayload($entity->getData(), $new_array);
+    $errors = $this->tideWebformJsonapiHelper->validatePayload($entity->getData(), $new_array, $original_elements);
     // Let webform core checks words and characters.
     $internal_errors = WebformSubmissionForm::validateWebformSubmission($entity);
     // Prepare error messages.
