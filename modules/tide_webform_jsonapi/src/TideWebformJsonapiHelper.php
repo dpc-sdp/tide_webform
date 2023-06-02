@@ -2,6 +2,8 @@
 
 namespace Drupal\tide_webform_jsonapi;
 
+use Respect\Validation\Validator as v;
+
 /**
  * Provides helper functions for tide_webform_jsonapi.
  */
@@ -68,12 +70,36 @@ class TideWebformJsonapiHelper {
   /**
    * Verifies the payload.
    */
-  public function validatePayload(array $payload, array $massaged_validates_array) {
+  public function validatePayload(array $payload, array $massaged_validates_array, array $original_elements) {
     $results = [];
+    // 1st step, check if all required field are submitted.
+    foreach ($massaged_validates_array as $key => $item) {
+      if (isset($item['required'])) {
+        if (!isset($payload[$key])) {
+          $results[$key] = ['The field is mandatory.'];
+        }
+      }
+    }
+    // 2nd step, check if it passes the validation.
     foreach ($payload as $id => $value) {
       if (array_key_exists($id, $massaged_validates_array)) {
         if (!empty($this->generateErrorString($value, $massaged_validates_array[$id]))) {
           $results[$id] = $this->generateErrorString($value, $massaged_validates_array[$id]);
+        }
+      }
+    }
+    // 3rd step, check if the field contains correct email or phone numbers.
+    foreach ($original_elements as $field_id => $detail) {
+      if (!isset($results[$field_id])) {
+        if ($detail['#type'] === 'email') {
+          if (v::email()->validate($payload[$field_id]) === FALSE) {
+            $results[$field_id] = ['Please provide a valid email address.'];
+          }
+        }
+        if ($detail['#type'] === 'tel') {
+          if (v::phone('AU')->validate($payload[$field_id]) === FALSE) {
+            $results[$field_id] = ['Please provide a valid Phone number.'];
+          }
         }
       }
     }
