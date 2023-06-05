@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\tide_webform_jsonapi\Resource;
+namespace Drupal\tide_webform_jsonapi\TideResource;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\jsonapi\JsonApiResource\ErrorCollection;
