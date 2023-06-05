@@ -76,15 +76,15 @@ class TideWebformJsonapiHelper {
     foreach ($massaged_validates_array as $key => $item) {
       if (isset($item['required'])) {
         if (!isset($payload[$key])) {
-          $results[$key] = ['The field is mandatory.'];
+          $payload[$key] = "";
         }
       }
     }
     // 2nd step, check if it passes the validation.
     foreach ($payload as $id => $value) {
       if (array_key_exists($id, $massaged_validates_array)) {
-        if (!empty($this->generateErrorString($value, $massaged_validates_array[$id]))) {
-          $results[$id] = $this->generateErrorString($value, $massaged_validates_array[$id]);
+        if (!empty($this->generateErrorString($value, $massaged_validates_array[$id], $original_elements[$id]['#title']))) {
+          $results[$id] = $this->generateErrorString($value, $massaged_validates_array[$id], $original_elements[$id]['#title']);
         }
       }
     }
@@ -109,11 +109,11 @@ class TideWebformJsonapiHelper {
   /**
    * Generates error messages.
    */
-  public function generateErrorString($value, array $arr) {
+  public function generateErrorString($value, array $arr, $title) {
     $res = [];
     foreach ($arr as $k => $v) {
-      if (call_user_func('tide_webform_jsonapi_' . $k . '_validate', $value, $v) !== TRUE) {
-        $res[] = call_user_func('tide_webform_jsonapi_' . $k . '_validate', $value, $v);
+      if (call_user_func('tide_webform_jsonapi_' . $k . '_validate', $value, $v, $title) !== TRUE) {
+        $res[] = call_user_func('tide_webform_jsonapi_' . $k . '_validate', $value, $v, $title);
       }
     }
     return $res;
