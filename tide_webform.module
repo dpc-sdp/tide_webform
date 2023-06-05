@@ -12,7 +12,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
-use Drupal\webform\WebformSubmissionForm;
 
 /**
  * Implements hook_config_ignore_settings_alter().
@@ -286,14 +285,6 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
       if (is_numeric($submission_data[$key])) {
         $submission_data[$key] = strval($submission_data[$key]);
         $webform_submission->setData($submission_data);
-      }
-    }
-  }
-  $errors = WebformSubmissionForm::validateWebformSubmission($webform_submission);
-  if ($errors) {
-    foreach ($elements as $key => $element) {
-      if (isset($errors[$key]) && !empty($errors[$key])) {
-        throw new Exception($errors[$key]);
       }
     }
   }

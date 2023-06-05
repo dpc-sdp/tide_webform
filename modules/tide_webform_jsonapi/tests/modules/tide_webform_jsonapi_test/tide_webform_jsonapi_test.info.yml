@@ -1,0 +1,12 @@
+name: 'JSON:API Tide_webform test module'
+type: module
+package: Testing
+dependencies:
+  - drupal:jsonapi
+  - jsonapi_resources:jsonapi_resources
+core_version_requirement: ^9 || ^10
+config_devel:
+  install:
+    - webform.webform.tide_webform_content_rating
+  optional:
+    - webform.settings
