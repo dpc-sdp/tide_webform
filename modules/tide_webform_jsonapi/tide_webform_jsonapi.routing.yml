@@ -2,7 +2,7 @@ tide_webform_jsonapi.add_webform:
   path: '/%jsonapi%/webform/{webform}/add'
   methods: ['POST']
   defaults:
-    _jsonapi_resource: Drupal\tide_webform_jsonapi\Resource\AddWebform
+    _jsonapi_resource: Drupal\tide_webform_jsonapi\TideResource\AddWebform
   requirements:
     _permission: 'access content'
   options:

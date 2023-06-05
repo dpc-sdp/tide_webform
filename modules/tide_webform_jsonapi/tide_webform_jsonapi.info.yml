@@ -1,6 +1,6 @@
 name: 'JSON:API Tide_webform'
 description: "This module let's you validate payload for webform."
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9.5 || ^10
 type: module
 dependencies:
   - drupal:jsonapi_resources

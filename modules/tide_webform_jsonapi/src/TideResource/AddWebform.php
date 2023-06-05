@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\tide_webform_jsonapi\Resource;
+namespace Drupal\tide_webform_jsonapi\TideResource;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\jsonapi\JsonApiResource\ErrorCollection;
@@ -106,8 +106,7 @@ final class AddWebform extends EntityQueryResourceBase implements ContainerInjec
       JsonApiDocumentTopLevel::class
     );
     static::validate($entity);
-    // It implies triggering the webform handlers.
-    $entity->save();
+
     // Massage, organise and verify the data.
     $original_elements = $webform->getElementsDecodedAndFlattened();
     $supported_validations = $this->tideWebformJsonapiHelper->getSupportedValidateElements();
@@ -136,8 +135,9 @@ final class AddWebform extends EntityQueryResourceBase implements ContainerInjec
       $document = new JsonApiDocumentTopLevel($errs, new NullIncludedData(), new LinkCollection([]));
       return new ResourceResponse($document, 422);
     }
-
     // Return 201 if no errors.
+    // Saving implies triggering the webform handlers.
+    $entity->save();
     $resource_object = ResourceObject::createFromEntity($resource_type, $entity);
     $primary_data = new ResourceObjectData([$resource_object], 1);
     return $this->createJsonapiResponse($primary_data, $request, 201);

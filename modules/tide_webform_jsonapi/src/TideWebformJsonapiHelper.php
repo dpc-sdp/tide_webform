@@ -90,7 +90,7 @@ class TideWebformJsonapiHelper {
     }
     // 3rd step, check if the field contains correct email or phone numbers.
     foreach ($original_elements as $field_id => $detail) {
-      if (!isset($results[$field_id])) {
+      if (!isset($results[$field_id]) && isset($payload[$field_id])) {
         if ($detail['#type'] === 'email') {
           if (v::email()->validate($payload[$field_id]) === FALSE) {
             $results[$field_id] = ['Please provide a valid email address.'];
