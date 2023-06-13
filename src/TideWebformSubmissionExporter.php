@@ -2,6 +2,7 @@
 
 namespace Drupal\tide_webform;
 
+use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\webform\WebformSubmissionExporter;
 use Drupal\webform\WebformSubmissionExporterInterface;
 use Drupal\Core\Archiver\ArchiverManager;
@@ -54,7 +55,7 @@ class TideWebformSubmissionExporter extends WebformSubmissionExporter {
   /**
    * {@inheritdoc}
    */
-  public function getQuery() {
+  public function getQuery(): QueryInterface {
     $query = parent::getQuery();
     $export_options = $this->getExportOptions();
 
