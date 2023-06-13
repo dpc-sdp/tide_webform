@@ -4,6 +4,7 @@ namespace Drupal\tide_webform;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\webform\WebformSubmissionListBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -37,7 +38,7 @@ class TideWebformSubmissionListBuilder extends WebformSubmissionListBuilder {
   /**
    * {@inheritdoc}
    */
-  protected function getQuery($keys = '', $state = '', $source_entity = '') {
+  protected function getQuery($keys = '', $state = '', $source_entity = ''): QueryInterface {
     $query = parent::getQuery($keys, $state, $source_entity);
     switch ($state) {
       case static::STATE_PROCESSED:
