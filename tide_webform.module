@@ -262,6 +262,16 @@ function tide_webform_form_webform_add_form_alter(&$form, FormStateInterface $fo
         $webform->setElements($elements);
       }
     }
+
+    // Make default submit button name.
+    if (!isset($elements['actions'])) {
+      $elements['actions'] = [
+        '#type' => 'webform_actions',
+        '#title' => 'Submit',
+      ];
+
+      $webform->setElements($elements);
+    }
   }
 
   $form_object->setEntity($webform);
