@@ -39,6 +39,7 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
 
   if ($form_id == 'webform_ui_element_form') {
     $form['#after_build'][] = 'tide_webform_webform_ui_element_form_after_build';
+    $form['#attached']['library'][] = 'tide_webform/webform';
   }
 
   if ($form_id == 'webform_submission_filter_form') {
