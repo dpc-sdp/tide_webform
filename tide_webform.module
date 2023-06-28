@@ -39,6 +39,7 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
 
   if ($form_id == 'webform_ui_element_form') {
     $form['#after_build'][] = 'tide_webform_webform_ui_element_form_after_build';
+    $form['#attached']['library'][] = 'tide_webform/webform';
   }
 
   if ($form_id == 'webform_submission_filter_form') {
@@ -261,6 +262,16 @@ function tide_webform_form_webform_add_form_alter(&$form, FormStateInterface $fo
 
         $webform->setElements($elements);
       }
+    }
+
+    // Make default submit button name.
+    if (!isset($elements['actions'])) {
+      $elements['actions'] = [
+        '#type' => 'webform_actions',
+        '#title' => 'Submit',
+      ];
+
+      $webform->setElements($elements);
     }
   }
 
