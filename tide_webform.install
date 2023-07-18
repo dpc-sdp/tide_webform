@@ -8,6 +8,7 @@
 use Drupal\block\Entity\Block;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\tide_webform\TideOperation;
+use Drupal\user\Entity\Role;
 use Drupal\webform\Entity\Webform;
 
 /**
@@ -361,4 +362,15 @@ function tide_webform_update_8015() {
   $config_read = _tide_read_config('block.block.tide_webform_content_rating', $config_location, FALSE);
   $new_config_entity = $storage->createFromStorageRecord($config_read);
   $new_config_entity->save();
+}
+
+/**
+ * Assign permission to access text editor in webforms.
+ */
+function tide_webform_update_8016() {
+  $role_ids = ['editor', 'approver', 'site_admin', 'contributor'];
+  foreach ($role_ids as $role_id) {
+    $role = Role::load($role_id);
+    $role->grantPermission('filter.format.webform_default')->save();
+  }
 }
