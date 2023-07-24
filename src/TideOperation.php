@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\tide_webform;
+
 use Drupal\user\Entity\Role;
 
 /**
@@ -89,7 +90,7 @@ class TideOperation {
   /**
    * Assign permission to access text editor in webforms.
    */
-  public static function accessTextEditorInWebform () {
+  public static function accessTextEditorInWebform() {
     $role_ids = ['editor', 'approver', 'site_admin', 'contributor'];
     foreach ($role_ids as $role_id) {
       $role = Role::load($role_id);
