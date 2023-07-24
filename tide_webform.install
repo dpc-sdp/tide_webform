@@ -12,4 +12,5 @@ use Drupal\tide_webform\TideOperation;
  */
 function tide_webform_install() {
   TideOperation::installWebformConfig();
+  TideOperation::accessTextEditorInWebform ();
 }

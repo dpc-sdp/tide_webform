@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\tide_webform;
+use Drupal\user\Entity\Role;
 
 /**
  * Helper class for install/update functions.
@@ -82,6 +83,19 @@ class TideOperation {
       }
       $config->set('element.excluded_elements', $excluded_elements_value);
       $config->save();
+    }
+  }
+
+  /**
+   * Assign permission to access text editor in webforms.
+   */
+  public static function accessTextEditorInWebform () {
+    $role_ids = ['editor', 'approver', 'site_admin', 'contributor'];
+    foreach ($role_ids as $role_id) {
+      $role = Role::load($role_id);
+      if ($role) {
+        $role->grantPermission('use text format webform_default')->save();
+      }
     }
   }
 
