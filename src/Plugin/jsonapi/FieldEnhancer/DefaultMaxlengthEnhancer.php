@@ -2,8 +2,8 @@
 
 namespace Drupal\tide_webform\Plugin\jsonapi\FieldEnhancer;
 
-use Drupal\webform\Plugin\WebformElement\TextBase;
 use Drupal\tide_api\Plugin\jsonapi\FieldEnhancer\YamlEnhancer;
+use Drupal\webform\Plugin\WebformElement\TextBase;
 use Shaper\Util\Context;
 
 /**
