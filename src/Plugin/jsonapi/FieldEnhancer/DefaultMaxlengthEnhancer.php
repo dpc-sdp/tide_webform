@@ -21,12 +21,13 @@ class DefaultMaxlengthEnhancer extends YamlEnhancer {
    * {@inheritdoc}
    */
   protected function doUndoTransform($data, Context $context) {
-    $result = parent::doUndoTransform($data, $context);
+
     if ($cache = \Drupal::cache()->get('webform_text_fields_default_maxlength')) {
       $result = $cache->data;
     }
     else {
       $types = [];
+      $result = parent::doUndoTransform($data, $context);
       /** @var Drupal\webform\Plugin\WebformElementManager $plugin_webform */
       $plugin_webform = \Drupal::service('plugin.manager.webform.element');
       foreach ($plugin_webform->getInstances() as $id => $instance) {
@@ -62,8 +63,8 @@ class DefaultMaxlengthEnhancer extends YamlEnhancer {
   public function updateElementsWithDefaultValue($types, &$array) {
     foreach ($array as &$value) {
       if (is_array($value)) {
-        if (isset($value['#type']) && in_array($value['#type'], $types) && !isset($value['#default_value'])) {
-          $value['#default_value'] = 255;
+        if (isset($value['#type']) && in_array($value['#type'], $types) && !isset($value['#maxlength'])) {
+          $value['#maxlength'] = 255;
         }
         self::updateElementsWithDefaultValue($types, $value);
       }
