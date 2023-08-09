@@ -3,8 +3,7 @@
 namespace Drupal\tide_webform\Plugin\jsonapi\FieldEnhancer;
 
 use Drupal\webform\Plugin\WebformElement\TextBase;
-use Drupal\Core\Serialization\Yaml;
-use Drupal\jsonapi_extras\Plugin\ResourceFieldEnhancerBase;
+use Drupal\tide_api\Plugin\jsonapi\FieldEnhancer\YamlEnhancer;
 use Shaper\Util\Context;
 
 /**
@@ -16,18 +15,18 @@ use Shaper\Util\Context;
  *   description = @Translation("Default Maxlength enhancer")
  * )
  */
-class DefaultMaxlengthEnhancer extends ResourceFieldEnhancerBase {
+class DefaultMaxlengthEnhancer extends YamlEnhancer {
 
   /**
    * {@inheritdoc}
    */
   protected function doUndoTransform($data, Context $context) {
+    $result = parent::doUndoTransform($data, $context);
     if ($cache = \Drupal::cache()->get('webform_text_fields_default_maxlength')) {
       $result = $cache->data;
     }
     else {
       $types = [];
-      $result = Yaml::decode($data);
       /** @var Drupal\webform\Plugin\WebformElementManager $plugin_webform */
       $plugin_webform = \Drupal::service('plugin.manager.webform.element');
       foreach ($plugin_webform->getInstances() as $id => $instance) {
@@ -36,16 +35,9 @@ class DefaultMaxlengthEnhancer extends ResourceFieldEnhancerBase {
         }
       }
       $this->updateElementsWithDefaultValue($types, $result);
-      \Drupal::cache()->set('webform_text_fields_default_maxlength', Yaml::encode($result));
+      \Drupal::cache()->set('webform_text_fields_default_maxlength', $result);
     }
     return $result;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function doTransform($data, Context $context) {
-    return $data;
   }
 
   /**
