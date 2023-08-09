@@ -21,7 +21,6 @@ class DefaultMaxlengthEnhancer extends YamlEnhancer {
    * {@inheritdoc}
    */
   protected function doUndoTransform($data, Context $context) {
-
     if ($cache = \Drupal::cache()->get('webform_text_fields_default_maxlength')) {
       $result = $cache->data;
     }
@@ -39,22 +38,6 @@ class DefaultMaxlengthEnhancer extends YamlEnhancer {
       \Drupal::cache()->set('webform_text_fields_default_maxlength', $result);
     }
     return $result;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOutputJsonSchema() {
-    return [
-      'anyOf' => [
-        ['type' => 'array'],
-        ['type' => 'boolean'],
-        ['type' => 'null'],
-        ['type' => 'number'],
-        ['type' => 'object'],
-        ['type' => 'string'],
-      ],
-    ];
   }
 
   /**
