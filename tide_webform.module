@@ -13,6 +13,8 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformSubmissionForm;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Component\Utility\NestedArray;
 
 /**
  * Implements hook_config_ignore_settings_alter().
@@ -40,6 +42,27 @@ function tide_webform_form_alter(&$form, FormStateInterface $form_state, $form_i
   if ($form_id == 'webform_ui_element_form') {
     $form['#after_build'][] = 'tide_webform_webform_ui_element_form_after_build';
     $form['#attached']['library'][] = 'tide_webform/webform';
+    if (isset($form['properties']['form']['length_container']['maxlength']) && array_key_exists('#default_value', $form['properties']['form']['length_container']['maxlength'])) {
+      $default_value = NestedArray::getValue($form,
+        [
+          'properties',
+          'form',
+          'length_container',
+          'maxlength',
+          '#default_value',
+        ]);
+      if ($default_value === NULL) {
+        NestedArray::setValue($form,
+          [
+            'properties',
+            'form',
+            'length_container',
+            'maxlength',
+            '#default_value',
+          ],
+          '255');
+      }
+    }
   }
 
   if ($form_id == 'webform_submission_filter_form') {
@@ -392,4 +415,11 @@ function tide_webform_webform_element_default_properties_alter(array &$propertie
     $properties["counter_type"] = "character";
     $properties["counter_maximum"] = 255;
   }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function tide_webform_webform_update(EntityInterface $entity) {
+  \Drupal::cache()->invalidate('webform_text_fields_default_maxlength');
 }
