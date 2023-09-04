@@ -125,7 +125,7 @@ resourceFields:
     fieldName: elements
     publicName: elements
     enhancer:
-      id: yaml
+      id: default_maxlength_enhancer
     disabled: false
     advancedOptionsIcon: ''
     enhancer_label: ''
