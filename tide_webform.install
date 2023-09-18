@@ -14,3 +14,12 @@ function tide_webform_install() {
   TideOperation::installWebformConfig();
   TideOperation::accessTextEditorInWebform();
 }
+
+/**
+ * Update elements enhancer to default_maxlength_enhancer.
+ */
+function tide_webform_update_8017() {
+  $config = \Drupal::configFactory()->getEditable('jsonapi_extras.jsonapi_resource_config.webform--webform');
+  $config->set('resourceFields.elements.enhancer.id', 'default_maxlength_enhancer');
+  $config->save();
+}
