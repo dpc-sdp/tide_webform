@@ -22,7 +22,7 @@
     }
   },
   "suggest": {
-    "dpc-sdp/tide_api:dev-feature/SRM-948-d10-update": "Allows to use Drupal in headless mode"
+    "dpc-sdp/tide_api:^4.0.0": "Allows to use Drupal in headless mode"
   },
   "repositories": {
     "drupal": {
