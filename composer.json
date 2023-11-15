@@ -1,5 +1,5 @@
 {
-  "description": "Webform configuration for Tide Drupal 8 distribution",
+  "description": "Webform configuration for Tide Drupal 10 distribution",
   "extra": {
     "patches": {
       "drupal/webform": {
@@ -120,14 +120,14 @@
     "codemirror/codemirror": "5.65.12",
     "dpc-sdp/tide_api": "dev-reference",
     "dpc-sdp/tide_core": "dev-reference",
-    "drupal/token_conditions": "dev-compatible-with-drupal-9",
+    "drupal/token_conditions": "dev-compatible-with-d10",
     "drupal/webform": "^6.2@beta",
     "jquery/inputmask": "5.0.8",
     "jquery/intl-tel-input": "17.0.19",
     "progress-tracker/progress-tracker": "2.0.7"
   },
   "suggest": {
-    "dpc-sdp/tide_api:^3.0.0": "Allows to use Drupal in headless mode"
+    "dpc-sdp/tide_api:^4.0.0": "Allows to use Drupal in headless mode"
   },
   "type": "drupal-module"
 }

@@ -368,7 +368,7 @@ function tide_webform_get_processed(WebformSubmission $webform_submission) {
  */
 function tide_webform_submission_filter_query($value) {
   $query = \Drupal::entityQuery('webform_submission');
-  $query->condition('processed', $value);
+  $query->condition('processed', $value)->accessCheck(TRUE);
   $webform_submission = \Drupal::routeMatch()->getParameter('webform');
   if ($webform_submission != NULL) {
     $id = $webform_submission->id();
