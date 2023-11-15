@@ -1,11 +1,11 @@
 {
   "name": "dpc-sdp/tide_webform",
-  "description": "Webform configuration for Tide Drupal 8 distribution",
+  "description": "Webform configuration for Tide Drupal 10 distribution",
   "type": "drupal-module",
   "license": "GPL-2.0-or-later",
   "require": {
-    "dpc-sdp/tide_core": "dev-feature/SRM-870-d10-update",
-    "dpc-sdp/tide_api": "dev-feature/SRM-948-d10-update",
+    "dpc-sdp/tide_core": "^4.0.0",
+    "dpc-sdp/tide_api": "^4.0.0",
     "drupal/token_conditions": "dev-compatible-with-d10",
     "drupal/webform": "^6.2@beta",
     "choices/choices": "9.0.1",
