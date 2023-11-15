@@ -1,12 +1,12 @@
 {
   "name": "dpc-sdp/tide_webform",
-  "description": "Webform configuration for Tide Drupal 8 distribution",
+  "description": "Webform configuration for Tide Drupal 10 distribution",
   "type": "drupal-module",
   "license": "GPL-2.0-or-later",
   "require": {
-    "dpc-sdp/tide_core": "^3.2.5",
-    "dpc-sdp/tide_api": "^3.0.0",
-    "drupal/token_conditions": "dev-compatible-with-drupal-9",
+    "dpc-sdp/tide_core": "^4.0.0",
+    "dpc-sdp/tide_api": "^4.0.0",
+    "drupal/token_conditions": "dev-compatible-with-d10",
     "drupal/webform": "^6.2@beta",
     "choices/choices": "9.0.1",
     "codemirror/codemirror": "5.65.12",
@@ -22,7 +22,7 @@
     }
   },
   "suggest": {
-    "dpc-sdp/tide_api:^3.0.0": "Allows to use Drupal in headless mode"
+    "dpc-sdp/tide_api:^4.0.0": "Allows to use Drupal in headless mode"
   },
   "repositories": {
     "drupal": {
