@@ -2,7 +2,7 @@ name: Tide Webform
 description: 'Provides Webform and related configuration.'
 type: module
 package: Tide
-core_version_requirement: ^8.9 || ^9
+core_version_requirement: ^9.5 || ^10
 dependencies:
   - config_filter:config_filter
   - config_ignore:config_ignore
@@ -10,6 +10,7 @@ dependencies:
   - webform:webform
   - webform:webform_ui
   - dpc-sdp:tide_core
+  - dpc-sdp:tide_api
 config_devel:
   install:
     - field.storage.node.field_show_content_rating
