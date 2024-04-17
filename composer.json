@@ -14,13 +14,6 @@
     "jquery/intl-tel-input": "17.0.19",
     "progress-tracker/progress-tracker": "2.0.7"
   },
-  "extra": {
-    "patches": {
-      "drupal/webform": {
-        "Exporting webform submission as batch does not allowed for extended field due to static method - https://www.drupal.org/project/webform/issues/3348336#comment-14969352": "https://www.drupal.org/files/issues/2023-03-16/exporting-webform-submission-static-batch-process-3348336-3.patch"
-      }
-    }
-  },
   "suggest": {
     "dpc-sdp/tide_api:^4.0.0": "Allows to use Drupal in headless mode"
   },

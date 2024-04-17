@@ -9,7 +9,6 @@ use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\user\Entity\User;
-use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Plugin\WebformExporterManagerInterface;
 use Drupal\webform\WebformSubmissionExporter;
@@ -73,14 +72,12 @@ class TideWebformSubmissionExporter extends WebformSubmissionExporter {
     $export_options = $this->getExportOptions();
     $entity_ids = $this->getQuery()->execute();
     if ($export_options['process_submissions']) {
-      $webform_submissions = WebformSubmission::loadMultiple($entity_ids);
-      foreach ($webform_submissions as $webform_submission) {
-        $processed_value = $webform_submission->processed->getValue()[0]['value'];
-        if ($processed_value == "0") {
-          $webform_submission->processed->setValue("1");
-          $webform_submission->save();
-        }
-      }
+      $database = \Drupal::database();
+      $database->update('webform_submission')
+        ->fields(['processed' => 1])
+        ->condition('sid', $entity_ids, 'IN')
+        ->execute();
+      \Drupal::entityTypeManager()->getStorage('webform_submission')->resetCache($entity_ids);
     }
 
     $this->logExport($entity_ids, $export_options);
