@@ -326,7 +326,7 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
     if ($element['#required'] == TRUE) {
       if (empty($submission_data[$key]) && $submission_data[$key] == "") {
         // Throw an exception or return an error message to prevent saving the webform.
-        throw new \Exception("The required field '{$element['#title']}' is empty oi j.");
+        throw new \Exception("The required field '{$element['#title']}' is empty.");
       }
     }
   }
