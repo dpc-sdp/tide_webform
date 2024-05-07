@@ -317,10 +317,10 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
   $submission_data = $webform_submission->getData();
   foreach ($elements as $key => $element) {
     // It will not validate for multi step form.
-    if ($element['#type'] == 'wizard_page') {
+    if (isset($element['#type']) && $element['#type'] == 'wizard_page') {
       return;
     }
-    if ($element['#type'] == 'number') {
+    if (isset($element['#type']) && $element['#type'] == 'number') {
       if (is_numeric($submission_data[$key])) {
         $submission_data[$key] = strval($submission_data[$key]);
         $webform_submission->setData($submission_data);
@@ -330,7 +330,7 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
     // @todo: refactior the code and submit a patch.
     // Look at webform issue - 3170790.
     // Server side validation from API submission.
-    if ($element['#required'] == TRUE) {
+    if (isset($element['#required']) && $element['#required'] == TRUE) {
       if (empty($submission_data[$key]) && $submission_data[$key] == "") {
         // Throw an exception or return an error message to prevent saving the webform.
         throw new \Exception("The required field '{$element['#title']}' is empty.");
