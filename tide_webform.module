@@ -316,12 +316,18 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
   // See /Drupal/Core/Form/FormValidator.php $is_empty_value.
   $submission_data = $webform_submission->getData();
   foreach ($elements as $key => $element) {
+    // It will not validate for multi step form.
+    if ($element['#type'] == 'wizard_page') {
+      return;
+    }
     if ($element['#type'] == 'number') {
       if (is_numeric($submission_data[$key])) {
         $submission_data[$key] = strval($submission_data[$key]);
         $webform_submission->setData($submission_data);
       }
     }
+    // SDPAP-6627 temporary fix until contrib module patch is created.
+    // Look at webform issue - 3170790.
     // Server side validation from API submission.
     if ($element['#required'] == TRUE) {
       if (empty($submission_data[$key]) && $submission_data[$key] == "") {
