@@ -327,6 +327,7 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
       }
     }
     // SDPAP-6627 temporary fix until contrib module patch is created.
+    // @todo: refactior the code and submit a patch.
     // Look at webform issue - 3170790.
     // Server side validation from API submission.
     if ($element['#required'] == TRUE) {
