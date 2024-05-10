@@ -327,10 +327,11 @@ function tide_webform_webform_submission_presave(WebformSubmission $webform_subm
       }
     }
     // SDPAP-6627 temporary fix until contrib module patch is created.
+    // Validation isolated to specific webform.
     // @todo: refactior the code and submit a patch.
     // Look at webform issue - 3170790.
     // Server side validation from API submission.
-    if (isset($element['#required']) && $element['#required'] == TRUE) {
+    if (isset($element['#required']) && $element['#required'] == TRUE && $webform->get('id') === 'tide_webform_content_rating') {
       if (empty($submission_data[$key]) && $submission_data[$key] == "") {
         // Throw an exception or return an error message to prevent saving the webform.
         throw new \Exception("The required field '{$element['#title']}' is empty.");
