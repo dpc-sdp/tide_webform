@@ -1,0 +1,20 @@
+uuid: b5cec42d-f8a2-437f-afb6-a3a1d2ac237e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: ZVr0kBylx9yn8NTujKwQaoMtR5G4yVJZ-rQGTNY1Fm4
+id: node.field_show_topic_term_and_tags
+field_name: field_show_topic_term_and_tags
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

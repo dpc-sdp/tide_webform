@@ -1,0 +1,23 @@
+uuid: ad3a2149-6473-45ac-8988-b4259868f699
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_business_contact_number
+  module:
+    - telephone
+    - user
+_core:
+  default_config_hash: Z2Zb7jf_mWv5hF1g6KcbhFhDE6i-kCcJbIRaTdZhmu4
+id: user.user.field_business_contact_number
+field_name: field_business_contact_number
+entity_type: user
+bundle: user
+label: 'Business contact number'
+description: 'Specify the business contact number for any non-VPS users'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

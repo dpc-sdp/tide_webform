@@ -1,0 +1,16 @@
+uuid: 65ef7b2d-f0e8-4bd2-bee3-457667a5456b
+langcode: en
+status: true
+dependencies:
+  module:
+    - admin_audit_trail
+    - system
+_core:
+  default_config_hash: D9fb5EsJtABmMeDgmwMf5BYsr_T7cIZvElgCybL8qdI
+id: site_auditor
+label: 'Site Auditor'
+weight: 101
+is_admin: null
+permissions:
+  - 'access admin audit trail'
+  - 'access site reports'

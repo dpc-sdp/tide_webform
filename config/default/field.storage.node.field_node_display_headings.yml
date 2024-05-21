@@ -1,0 +1,29 @@
+uuid: 621f9b8a-8c58-4c59-abee-1442b844d146
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+_core:
+  default_config_hash: l4Dqv5-WoUMr100jG1_wYzeBvtaHIskg3hJJ72NRh2U
+id: node.field_node_display_headings
+field_name: field_node_display_headings
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: showH2
+      label: 'Show level 2 (H2) only.'
+    -
+      value: showH2AndH3
+      label: 'Show level 2 (H2) and level 3 (H3).'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

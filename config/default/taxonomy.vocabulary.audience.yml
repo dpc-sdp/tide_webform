@@ -1,0 +1,10 @@
+uuid: 7238e63d-46dd-4968-b944-a7c1b25cdcdf
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: u9cdQrv4MCeHsi93gl29xS62YFuKJJw75mS16kOcW4I
+name: Audience
+vid: audience
+description: 'Department for audience type.'
+weight: 0

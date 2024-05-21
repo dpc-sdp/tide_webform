@@ -1,0 +1,22 @@
+uuid: 8e66069b-cd98-467e-b517-070fc73bf89b
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - paragraphs
+_core:
+  default_config_hash: bLQmEmu-MZWL42HFnl1X6ULKxQI2UmdQguQEQf9jYrA
+id: paragraph.field_statistic_block
+field_name: field_statistic_block
+entity_type: paragraph
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 8
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

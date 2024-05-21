@@ -1,0 +1,22 @@
+uuid: 1cdf190a-4997-40e1-b9bd-b2d9fb850c5b
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - node
+_core:
+  default_config_hash: SkyOo-QDIAOD8FT115YH9zGqB2lUO9C-osSGeBpzlaE
+id: node.field_graphical_image
+field_name: field_graphical_image
+entity_type: node
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,20 @@
+uuid: c0f04efe-4e68-4739-9c82-4f4f5a44abaa
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+_core:
+  default_config_hash: ZIn_l-UPbmeYhon7WiUJVdNAf7D8DmhXPpx-6sfXiH4
+id: paragraph.field_statistics_grid_theme
+field_name: field_statistics_grid_theme
+entity_type: paragraph
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

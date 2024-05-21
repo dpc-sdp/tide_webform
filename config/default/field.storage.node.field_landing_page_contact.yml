@@ -1,0 +1,23 @@
+uuid: b0dc2116-4008-4dca-a628-de7a917d7d9e
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+_core:
+  default_config_hash: 44P6yyls6mIqPB3LWhVew7pVgU37ObXK2cRxoAzIjX4
+id: node.field_landing_page_contact
+field_name: field_landing_page_contact
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

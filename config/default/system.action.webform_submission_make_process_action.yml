@@ -1,0 +1,13 @@
+uuid: 3bec643b-c085-4ffb-9f0b-099fd48dd556
+langcode: en
+status: true
+dependencies:
+  module:
+    - tide_webform
+_core:
+  default_config_hash: 9d0QBmRb-u8U5RCMOFDWzgWK2b4hkxf0ZUbr2RwYAGw
+id: webform_submission_make_process_action
+label: 'Mark as exported'
+type: webform_submission
+plugin: webform_submission_make_process_action
+configuration: {  }

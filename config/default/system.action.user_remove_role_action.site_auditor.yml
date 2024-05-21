@@ -1,0 +1,16 @@
+uuid: 34023394-ba9e-4ddc-bc12-f3597c6bb2ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.site_auditor
+  module:
+    - user
+_core:
+  default_config_hash: hERaIge7NPxFKK_Cf1e9BQXoHr6pmxwaqw49bpCsHAY
+id: user_remove_role_action.site_auditor
+label: 'Remove the Site Auditor role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: site_auditor

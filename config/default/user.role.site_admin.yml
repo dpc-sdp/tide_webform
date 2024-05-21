@@ -1,0 +1,118 @@
+uuid: 8f44a762-cdf3-4392-997b-6a63a5cada7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.admin_text
+    - filter.format.rich_text
+    - filter.format.summary_text
+    - filter.format.webform_default
+    - taxonomy.vocabulary.audience
+    - taxonomy.vocabulary.department
+    - taxonomy.vocabulary.location
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.topic
+  module:
+    - admin_audit_trail
+    - block
+    - content_moderation
+    - file
+    - filter
+    - media
+    - node
+    - path
+    - pathauto
+    - redirect
+    - role_delegation
+    - scheduled_transitions
+    - system
+    - tablefield
+    - taxonomy
+    - tide_core
+    - toolbar
+    - user_created_by_field
+_core:
+  default_config_hash: H05kO_kVSlZNQVBzY1MpYWgKXZjYxGJnKV1SOJgz25c
+id: site_admin
+label: 'Site Admin'
+weight: 3
+is_admin: null
+permissions:
+  - 'access admin audit trail'
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access files overview'
+  - 'access media overview'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'addrow tablefield'
+  - 'administer blocks'
+  - 'administer menu'
+  - 'administer nodes'
+  - 'administer pathauto'
+  - 'administer redirect settings'
+  - 'administer redirects'
+  - 'administer taxonomy'
+  - 'administer url aliases'
+  - 'administer users'
+  - 'assign approver role'
+  - 'assign contributor role'
+  - 'assign editor role'
+  - 'assign previewer role'
+  - 'assign site_admin role'
+  - 'assign site_auditor role'
+  - 'bypass node access'
+  - 'create field_business_contact_number'
+  - 'create field_business_name'
+  - 'create field_notes'
+  - 'create media'
+  - 'create terms in audience'
+  - 'create terms in department'
+  - 'create terms in location'
+  - 'create terms in tags'
+  - 'create terms in topic'
+  - 'create url aliases'
+  - 'delete all revisions'
+  - 'delete any media'
+  - 'delete media'
+  - 'delete terms in audience'
+  - 'delete terms in department'
+  - 'delete terms in location'
+  - 'delete terms in tags'
+  - 'delete terms in topic'
+  - 'edit field_business_contact_number'
+  - 'edit field_business_name'
+  - 'edit field_notes'
+  - 'edit terms in audience'
+  - 'edit terms in department'
+  - 'edit terms in location'
+  - 'edit terms in tags'
+  - 'edit terms in topic'
+  - 'import tablefield'
+  - 'rebuild tablefield'
+  - 'revert all revisions'
+  - 'update any media'
+  - 'update media'
+  - 'use editorial transition archive'
+  - 'use editorial transition archive_pending'
+  - 'use editorial transition archived_draft'
+  - 'use editorial transition archived_published'
+  - 'use editorial transition create_archive_pending'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition needs_review'
+  - 'use editorial transition needs_review_draft'
+  - 'use editorial transition publish'
+  - 'use text format admin_text'
+  - 'use text format rich_text'
+  - 'use text format summary_text'
+  - 'use text format webform_default'
+  - 'view all revisions'
+  - 'view all scheduled transitions'
+  - 'view any unpublished content'
+  - 'view field_business_contact_number'
+  - 'view field_business_name'
+  - 'view field_notes'
+  - 'view latest version'
+  - 'view own unpublished content'
+  - 'view the administration theme'
+  - 'view user created by field'

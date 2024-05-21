@@ -1,0 +1,16 @@
+uuid: ea150f61-f187-4c8b-bd3c-59d96dd53c1b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: VnG4gSaAFphRghMBRF5x805GJcL74MF4tDxHOJwUT_I
+id: content_title
+label: 'Content Title'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria: {  }
+selection_logic: and
+weight: 0
+relationships: {  }

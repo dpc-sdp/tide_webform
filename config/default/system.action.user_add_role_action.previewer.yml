@@ -1,0 +1,16 @@
+uuid: a9588151-b03a-4508-9cf9-580de02a11a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.previewer
+  module:
+    - user
+_core:
+  default_config_hash: C53USqbzMh9aNCWehuk8fasw2I8wmLRlANnCSinanMQ
+id: user_add_role_action.previewer
+label: 'Add the Previewer role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: previewer

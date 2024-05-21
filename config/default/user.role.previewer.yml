@@ -1,0 +1,17 @@
+uuid: 86d54936-9a9d-46d0-bf4f-d06405732dd8
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_moderation
+    - node
+_core:
+  default_config_hash: zbJjIPukS8pzFFL-rnsNYo8P4vXmZXhBX_6wl_K7fsQ
+id: previewer
+label: Previewer
+weight: 5
+is_admin: null
+permissions:
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view latest version'

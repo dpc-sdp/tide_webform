@@ -1,0 +1,56 @@
+uuid: 90d9449e-c878-41b0-a3fb-d49acbb82f85
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.rich_text
+    - filter.format.summary_text
+    - filter.format.webform_default
+  module:
+    - block
+    - content_moderation
+    - filter
+    - media
+    - node
+    - path
+    - system
+    - tablefield
+    - tide_core
+    - toolbar
+_core:
+  default_config_hash: l_FxcE3fa58sVKPh5Swd0W4ChFs_rxhwykKQfqJ6IZQ
+id: editor
+label: Editor
+weight: 4
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access media overview'
+  - 'access toolbar'
+  - 'addrow tablefield'
+  - 'administer blocks'
+  - 'administer menu'
+  - 'administer url aliases'
+  - 'create media'
+  - 'create url aliases'
+  - 'delete all revisions'
+  - 'delete any media'
+  - 'delete media'
+  - 'rebuild tablefield'
+  - 'revert all revisions'
+  - 'revert all revisions'
+  - 'update any media'
+  - 'update media'
+  - 'use editorial transition archive_pending'
+  - 'use editorial transition create_archive_pending'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition needs_review'
+  - 'use editorial transition needs_review_draft'
+  - 'use text format rich_text'
+  - 'use text format summary_text'
+  - 'use text format webform_default'
+  - 'view all revisions'
+  - 'view latest version'
+  - 'view own unpublished content'
+  - 'view the administration theme'

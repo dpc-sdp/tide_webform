@@ -1,0 +1,7 @@
+_core:
+  default_config_hash: mH5eVdYxQGzUKA4ge53YcASgzzw57deVqbMa88rmcfc
+data_sources:
+  upload: upload
+csv_separator: ','
+rows: 5
+cols: 5

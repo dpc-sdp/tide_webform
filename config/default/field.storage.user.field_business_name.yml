@@ -1,0 +1,27 @@
+uuid: a26b36db-6066-42ba-b7e2-452846597028
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - user
+third_party_settings:
+  field_permissions:
+    permission_type: custom
+_core:
+  default_config_hash: jbNuyJuTiv2njMGS5cqfnmOfZXdhNzw6sK8mcnzx9m0
+id: user.field_business_name
+field_name: field_business_name
+entity_type: user
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

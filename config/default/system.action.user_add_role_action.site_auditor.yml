@@ -1,0 +1,16 @@
+uuid: a1d6bdc3-11b6-4660-8281-c66d65ceffdc
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.site_auditor
+  module:
+    - user
+_core:
+  default_config_hash: T7Yc4h1ZNqY1Zj14SlcNtnJC1C4hxkUw2dOuLyfswuU
+id: user_add_role_action.site_auditor
+label: 'Add the Site Auditor role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: site_auditor

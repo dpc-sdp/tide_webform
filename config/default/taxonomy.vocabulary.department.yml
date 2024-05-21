@@ -1,0 +1,10 @@
+uuid: 0daa50cf-b4fd-4e9d-ae78-d650b669c784
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: jkhktNThhjd5pPIIbUp9JPEwA-JxsWpZVhfAdVHPny4
+name: Department
+vid: department
+description: 'The Government Department or Agency.'
+weight: 0

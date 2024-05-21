@@ -1,0 +1,10 @@
+uuid: 9c2106b7-693e-4a01-9881-cb07010cc06b
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: lSaIXGJ3UVkUvTldmrW8KbB66xim3jxIPsBL5eGPABo
+name: 'Content category'
+vid: content_category
+description: 'Categories assigned to all content to assist with filtering in content collection and search'
+weight: 0

@@ -1,0 +1,16 @@
+uuid: c3b1bbb0-9998-47ba-9b90-5451c2a7d21a
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+_core:
+  default_config_hash: kh5cEF649SSMeXGaxdvsLnU-t-kwdquTjJ8BYQb51BA
+id: taxonomy_term
+label: 'Taxonomy term'
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:vocabulary:machine-name]/[term:name]'
+selection_criteria: {  }
+selection_logic: and
+weight: 0
+relationships: {  }

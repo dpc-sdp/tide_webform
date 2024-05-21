@@ -1,0 +1,29 @@
+uuid: 8b59a1b8-ab66-4497-a44d-6cf98322ae6b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_notes
+  module:
+    - allowed_formats
+    - text
+    - user
+third_party_settings:
+  allowed_formats:
+    allowed_formats:
+      - rich_text
+_core:
+  default_config_hash: hrtYRWfBAbOlbPTaT3WpUURHuvMaPo8woEusMIEIgWI
+id: user.user.field_notes
+field_name: field_notes
+entity_type: user
+bundle: user
+label: Notes
+description: 'This field is only visible to admins and site admins.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

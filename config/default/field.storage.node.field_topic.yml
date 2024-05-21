@@ -1,0 +1,22 @@
+uuid: 155015c5-b7e8-4218-ad78-3e856e8f34dc
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+_core:
+  default_config_hash: z4IZi2C0yOtJ0GmuSCNUz3gLzUDc5zl-8zsYEDwEu1o
+id: node.field_topic
+field_name: field_topic
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: true
+custom_storage: false

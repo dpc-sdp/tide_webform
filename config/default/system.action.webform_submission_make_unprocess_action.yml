@@ -1,0 +1,13 @@
+uuid: 78a2a1fd-101b-4a91-990d-3b02dec91d34
+langcode: en
+status: true
+dependencies:
+  module:
+    - tide_webform
+_core:
+  default_config_hash: bXYa-gWuoaBalPHUFE_lMWLJHSix9h_97rAYDIv1ubo
+id: webform_submission_make_unprocess_action
+label: 'Mark as new'
+type: webform_submission
+plugin: webform_submission_make_unprocess_action
+configuration: {  }

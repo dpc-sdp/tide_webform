@@ -1,0 +1,56 @@
+uuid: 820f309f-4619-41e2-b803-9699f7e74eb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.rich_text
+    - filter.format.summary_text
+    - filter.format.webform_default
+  module:
+    - block
+    - content_moderation
+    - filter
+    - media
+    - node
+    - override_node_options
+    - path
+    - system
+    - tablefield
+    - tide_core
+    - toolbar
+_core:
+  default_config_hash: RD-h79Pf-mh7l1pWpPPlxJZkrbOom-8x1b0P01jWodg
+id: contributor
+label: Contributor
+weight: 10
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access media overview'
+  - 'access toolbar'
+  - 'addrow tablefield'
+  - 'administer blocks'
+  - 'administer menu'
+  - 'administer url aliases'
+  - 'create media'
+  - 'create url aliases'
+  - 'delete all revisions'
+  - 'delete any media'
+  - 'delete media'
+  - 'enter all revision log entry'
+  - 'import tablefield'
+  - 'rebuild tablefield'
+  - 'revert all revisions'
+  - 'update any media'
+  - 'update media'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition needs_review_draft'
+  - 'use text format rich_text'
+  - 'use text format summary_text'
+  - 'use text format webform_default'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view latest version'
+  - 'view own unpublished content'
+  - 'view the administration theme'

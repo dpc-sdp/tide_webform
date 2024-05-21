@@ -1,0 +1,20 @@
+uuid: e7067b76-4023-4f74-bc4a-119e4e0cc750
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+_core:
+  default_config_hash: nRO8iLaBUrWug_SZnKbguBI0BJAEd5sB0WEx5rRXnYg
+id: paragraph.field_current_milestone
+field_name: field_current_milestone
+entity_type: paragraph
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

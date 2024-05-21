@@ -1,0 +1,14 @@
+uuid: c89646e6-57a1-46e5-834e-d07d1b61f6b8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - tide_core
+_core:
+  default_config_hash: q4z19DJHzCM-qnktWEnrDeM-QE-DRXZxLZxl-_4cpoo
+id: tide_core_publish
+label: 'Publish content'
+type: node
+plugin: tide_core_publish_action
+configuration: {  }

@@ -1,0 +1,10 @@
+uuid: 7f905351-23fb-423a-896c-a5e0c0bf5fb9
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: O875XLG3iro2cEVlyOEShSJMqdaNdjF4my6LWfFS04U
+name: Tags
+vid: tags
+description: 'Use tags to relate content.'
+weight: 0

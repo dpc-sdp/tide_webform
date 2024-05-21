@@ -1,0 +1,68 @@
+uuid: 0da1ea64-693c-4f80-98bc-79c5537eacc3
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.admin_text
+    - filter.format.rich_text
+    - filter.format.summary_text
+    - filter.format.webform_default
+  module:
+    - block
+    - content_lock
+    - content_moderation
+    - filter
+    - media
+    - node
+    - path
+    - redirect
+    - scheduled_transitions
+    - system
+    - tablefield
+    - tide_core
+    - toolbar
+_core:
+  default_config_hash: H4HAUiuir6Tccg0Dn4gRJu6n2FoTR8JJbJTAxHZfUoA
+id: approver
+label: Approver
+weight: 3
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access media overview'
+  - 'access toolbar'
+  - 'addrow tablefield'
+  - 'administer blocks'
+  - 'administer menu'
+  - 'administer redirects'
+  - 'administer url aliases'
+  - 'break content lock'
+  - 'create media'
+  - 'create url aliases'
+  - 'delete all revisions'
+  - 'delete any media'
+  - 'delete media'
+  - 'import tablefield'
+  - 'rebuild tablefield'
+  - 'revert all revisions'
+  - 'tide node bulk update'
+  - 'update any media'
+  - 'update media'
+  - 'use editorial transition archive'
+  - 'use editorial transition archived_draft'
+  - 'use editorial transition archived_published'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition needs_review'
+  - 'use editorial transition needs_review_draft'
+  - 'use editorial transition publish'
+  - 'use text format admin_text'
+  - 'use text format rich_text'
+  - 'use text format summary_text'
+  - 'use text format webform_default'
+  - 'view all revisions'
+  - 'view all scheduled transitions'
+  - 'view any unpublished content'
+  - 'view latest version'
+  - 'view own unpublished content'
+  - 'view the administration theme'

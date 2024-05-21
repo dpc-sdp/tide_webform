@@ -1,0 +1,25 @@
+uuid: 87af2687-e617-453b-9655-40c2b7b35e20
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_paragraph_link
+    - paragraphs.paragraphs_type.related_links
+  module:
+    - link
+_core:
+  default_config_hash: KhBoTRw-bMVcTZ-BdOS758bNaeLTtFal_30ncU2E0KQ
+id: paragraph.related_links.field_paragraph_link
+field_name: field_paragraph_link
+entity_type: paragraph
+bundle: related_links
+label: Link
+description: 'Add a descriptive title for your link. This is what displays on the live website.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

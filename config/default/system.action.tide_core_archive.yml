@@ -1,0 +1,14 @@
+uuid: edcfee17-946c-476b-9215-b3393472f24d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - tide_core
+_core:
+  default_config_hash: _SaNLhui6g0SnSJhSRdkPQYTohk-OMcnJHlV9Dn8Nto
+id: tide_core_archive
+label: 'Archive content'
+type: node
+plugin: tide_core_archive_action
+configuration: {  }

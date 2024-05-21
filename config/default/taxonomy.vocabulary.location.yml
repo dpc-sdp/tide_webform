@@ -1,0 +1,10 @@
+uuid: b212471d-0de1-4876-b8b0-1bb2e4874add
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: mzF_Ps8XcwSlhHuRobbaNtCD_S3jwAlIqSaVZWYYUQ8
+name: Location
+vid: location
+description: 'Used for grouping of related content by location.'
+weight: 0
