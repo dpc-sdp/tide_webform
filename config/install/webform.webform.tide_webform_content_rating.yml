@@ -31,6 +31,13 @@ elements: |-
         ':input[name="was_this_page_helpful"]':
           checked: true
     '#format_items': comma
+  help_text:
+    '#type': webform_markup
+    '#states':
+      visible:
+        ':input[name="was_this_page_helpful"]':
+          checked: true
+    '#markup': '<p>test</p>'
   reset:
     '#type': processed_text
     '#wrapper_attributes':
@@ -42,13 +49,6 @@ elements: |-
           checked: true
     '#text': '<p><a id="webform-content-rating-cancel" href="#">Cancel</a></p>'
     '#format': admin_text
-  help_text_any_comments:
-    '#type': webform_markup
-    '#states':
-      visible:
-        ':input[name="was_this_page_helpful"]':
-          '': ''
-    '#display_on': both
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
