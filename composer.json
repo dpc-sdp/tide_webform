@@ -3,7 +3,7 @@
   "extra": {
     "patches": {
       "drupal/webform": {
-        "Exporting webform submission as batch does not allowed for extended field due to static method - https://www.drupal.org/project/webform/issues/3348336#comment-14969352": "https://www.drupal.org/files/issues/2023-03-16/exporting-webform-submission-static-batch-process-3348336-3.patch"
+        "Exporting webform submission as batch does not allowed for extended field due to static method - https://www.drupal.org/project/webform/issues/3348336#comment-15686345": "https://www.drupal.org/files/issues/2024-07-24/exporting-webform-submission-static-batch-process-3348336-8.patch"
       }
     }
   },
