@@ -14,3 +14,14 @@ function tide_webform_install() {
   TideOperation::installWebformConfig();
   TideOperation::accessTextEditorInWebform();
 }
+
+/**
+ * Enables webform_wizard_page element.
+ */
+function tide_webform_update_10001() {
+  $config = \Drupal::configFactory()->getEditable('webform.settings');
+  $excluded_elements_value = $config->get('element.excluded_elements');
+  unset($excluded_elements_value['webform_wizard_page']);
+  $config->set('element.excluded_elements', $excluded_elements_value);
+  $config->save();
+}
