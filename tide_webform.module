@@ -556,29 +556,28 @@ function tide_webform_webform_third_party_settings_form_alter(array &$form, Form
  * Captcha form validate.
  */
 function _tide_webform_captcha_form_validate(&$form, FormStateInterface $form_state) {
-  $third_party_settings = $form_state->getValue('third_party_settings');
-  $tide_webform_settings = &$third_party_settings['tide_webform_captcha'];
+  $settings = &$form_state->getValue(['third_party_settings', 'tide_webform_captcha']);
+  $captcha_details = $settings['captcha_type_dropdown_container']['captcha_details'] ?? null;
 
-  // Handle CAPTCHA details.
-  if (isset($tide_webform_settings['captcha_type_dropdown_container']['captcha_details'][0]['target_id'])) {
-    $term_id = $tide_webform_settings['captcha_type_dropdown_container']['captcha_details'][0]['target_id'];
-    if ($term_id) {
-      $term = Term::load($term_id);
-      $tide_webform_settings['captcha_details'] = [
-        'site_key' => $term->get('field_site_key')->value,
-        'term_id' => $term_id,
-      ];
-    }
-  }
-  elseif ($tide_webform_settings['captcha_type_dropdown_container']['captcha_details'] === NULL) {
-    $tide_webform_settings['captcha_details'] = NULL;
+  if (is_array($captcha_details) && isset($captcha_details[0]['target_id'])) {
+    $term_id = $captcha_details[0]['target_id'];
+  } elseif (is_numeric($captcha_details)) {
+    $term_id = $captcha_details;
+  } else {
+    $term_id = null;
   }
 
-  // Remove the captcha_type_dropdown_container.
-  unset($tide_webform_settings['captcha_type_dropdown_container']);
+  if ($term_id) {
+    $term = Term::load($term_id);
+    $settings['captcha_details'] = [
+      'site_key' => $term->get('field_site_key')->value,
+      'term_id' => (int)$term_id,
+    ];
+  } else {
+    $settings['captcha_details'] = null;
+  }
 
-  // Update the form state.
-  $form_state->setValue('third_party_settings', $third_party_settings);
+  unset($settings['captcha_type_dropdown_container']);
 }
 
 /**
