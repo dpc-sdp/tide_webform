@@ -572,6 +572,7 @@ function _tide_webform_captcha_form_validate(&$form, FormStateInterface $form_st
     $settings['captcha_details'] = [
       'site_key' => $term->get('field_site_key')->value,
       'term_id' => (int)$term_id,
+      'captcha_id' => _tide_webform_get_captcha_id($term),
     ];
   } else {
     $settings['captcha_details'] = null;
@@ -610,4 +611,12 @@ function _tide_webform_threshold_validate($element, FormStateInterface $form_sta
   else {
     $form_state->setError($element, t('Enter a value between 0.0 and 1.0. Use only one decimal place (e.g., 0.0, 0.5, 1.0).'));
   }
+}
+
+/**
+ * Gets captcha id.
+ */
+function _tide_webform_get_captcha_id(Term $term) {
+  $uri = $term->toLink()->getUrl()->toString();
+  return pathinfo(rtrim($uri, '/'), PATHINFO_BASENAME);
 }
